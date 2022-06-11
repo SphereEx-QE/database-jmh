@@ -16,6 +16,7 @@
         <module>jmh-mysqlx</module>
     
         <module>jmh-dangling</module>
+        <module>jmh-sursen</module>
     </modules>
     <packaging>pom</packaging>
     
