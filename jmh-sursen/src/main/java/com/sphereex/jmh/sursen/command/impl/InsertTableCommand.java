@@ -24,6 +24,19 @@ public class InsertTableCommand implements DataCommand, SpecificDataCommand {
 
     @Override
     public void execute(DataSource dataSource, String tableName) throws SQLException {
+        int tableSize = Integer.parseInt(tableName.substring(tableName.lastIndexOf("1"))) * 10_000;
+        if (tableName.startsWith("tb_f_user")) {
+            User user = new User();
+            user.insertData(dataSource, tableSize);
+        }
+        if (tableName.startsWith("tb_f_user_cert")) {
+            UserCert userCert = new UserCert();
+            userCert.insertData(dataSource, tableSize);
+        }
+        if (tableName.startsWith("tb_f_user_contact")) {
+            UserContact userContact = new UserContact();
+            userContact.insertData(dataSource, tableSize);
+        }
     }
 
     private void insertAllTable(DataSource dataSource) throws SQLException {

@@ -6,6 +6,7 @@ import javax.sql.DataSource;
 import java.sql.SQLException;
 
 public class EmptyCommand implements CommandReceiver {
+    
     @Override
     public void insertData(DataSource dataSource, int tableSize) throws SQLException {
     }

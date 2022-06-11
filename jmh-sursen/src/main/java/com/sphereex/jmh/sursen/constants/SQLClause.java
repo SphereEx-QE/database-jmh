@@ -5,7 +5,7 @@ public interface SQLClause {
     String USER_CREATION = "CREATE TABLE `TABLE_NAME` (\n" +
             "  `id` varchar(64) NOT NULL COMMENT '主键',\n" +
             "  `name` varchar(50) NOT NULL COMMENT '姓名',\n" +
-            "  `birthday` date DEFAULT NULL COMMENT '生日',\n" +
+            "  `birthday` varchar(80) DEFAULT NULL COMMENT '生日',\n" +
             "  `gender` char(1) DEFAULT NULL COMMENT '性别 M-男 F-女',\n" +
             "  `nationality` char(2) DEFAULT NULL COMMENT '国籍',\n" +
             "  `contact_person` varchar(50) DEFAULT NULL COMMENT '联系人',\n" +

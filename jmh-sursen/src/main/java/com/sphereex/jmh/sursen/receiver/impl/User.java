@@ -9,10 +9,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.UUID;
 
 public class User implements CommandReceiver {
+    
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     @Override
     public void insertData(DataSource dataSource, int tableSize) throws SQLException {
@@ -30,16 +33,27 @@ public class User implements CommandReceiver {
 
     private void setRandomDataForStatement(PreparedStatement preparedStatement) throws SQLException {
         Timestamp now = new Timestamp(Calendar.getInstance().getTimeInMillis());
+        // id
         preparedStatement.setString(1, UUID.randomUUID().toString());
+        // name
         preparedStatement.setString(2, RandomDataUtil.getRandomName());
-        preparedStatement.setDate(3, RandomDataUtil.getRandomBirthDay());
+        // birthday
+        preparedStatement.setString(3, RandomDataUtil.getRandomBirthDayStr());
+        // gender
         preparedStatement.setInt(4, RandomDataUtil.getRandomGender());
+        // nationality
         preparedStatement.setString(5, RandomDataUtil.getRandomNationality());
+        // contact_person
         preparedStatement.setString(6, RandomDataUtil.getRandomName());
+        // create_time
         preparedStatement.setTimestamp(7, now);
+        // update_time
         preparedStatement.setTimestamp(8, now);
+        // version
         preparedStatement.setInt(9, 1);
+        // updator
         preparedStatement.setString(10, RandomDataUtil.getRandomName());
+        // disable
         preparedStatement.setInt(11, 0);
     }
 }

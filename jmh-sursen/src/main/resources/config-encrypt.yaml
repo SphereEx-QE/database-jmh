@@ -144,4 +144,4 @@ rules:
             encryptorName: sm4_encryptor
             
 props:
-  sql-show: true
+  sql-show: false

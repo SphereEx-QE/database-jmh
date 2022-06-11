@@ -49,10 +49,10 @@ public class UserCert implements CommandReceiver {
         // update_time
         preparedStatement.setTimestamp(10, now);
         // version
-        preparedStatement.setInt(9, 1);
+        preparedStatement.setInt(11, 1);
         // updator
-        preparedStatement.setString(10, RandomDataUtil.getRandomName());
+        preparedStatement.setString(12, RandomDataUtil.getRandomName());
         // disable
-        preparedStatement.setInt(11, 0);
+        preparedStatement.setInt(13, 0);
     }
 }
