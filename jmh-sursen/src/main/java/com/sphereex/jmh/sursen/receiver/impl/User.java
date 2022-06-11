@@ -36,7 +36,7 @@ public class User implements CommandReceiver {
         // id
         preparedStatement.setString(1, UUID.randomUUID().toString());
         // name
-        preparedStatement.setString(2, RandomDataUtil.getRandomName());
+        preparedStatement.setString(2, RandomDataUtil.getRandomUserName());
         // birthday
         preparedStatement.setString(3, RandomDataUtil.getRandomBirthDayStr());
         // gender
@@ -44,7 +44,7 @@ public class User implements CommandReceiver {
         // nationality
         preparedStatement.setString(5, RandomDataUtil.getRandomNationality());
         // contact_person
-        preparedStatement.setString(6, RandomDataUtil.getRandomName());
+        preparedStatement.setString(6, RandomDataUtil.getRandomUserName());
         // create_time
         preparedStatement.setTimestamp(7, now);
         // update_time
@@ -52,7 +52,7 @@ public class User implements CommandReceiver {
         // version
         preparedStatement.setInt(9, 1);
         // updator
-        preparedStatement.setString(10, RandomDataUtil.getRandomName());
+        preparedStatement.setString(10, RandomDataUtil.getRandomUserName());
         // disable
         preparedStatement.setInt(11, 0);
     }

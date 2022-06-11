@@ -2,6 +2,7 @@ package com.sphereex.jmh.sursen.util;
 
 import com.sphereex.jmh.sursen.enums.NameEnum;
 import com.sphereex.jmh.sursen.enums.NationalityEnum;
+import org.apache.commons.lang3.RandomStringUtils;
 
 import java.sql.Date;
 import java.time.LocalDateTime;
@@ -35,8 +36,15 @@ public class RandomDataUtil {
         return NationalityEnum.values()[RANDOM.nextInt(5)].name();
     }
 
-    public static String getRandomName() {
+    public static String getRandomUserName() {
         return NameEnum.values()[RANDOM.nextInt(12)].name();
     }
 
+    public static String getRandomMobileNumber() {
+        return RANDOM.nextInt(130, 199) + RandomStringUtils.randomNumeric(8);
+    }
+
+    public static String getRandomEmailAddress() {
+        return RandomStringUtils.randomAlphabetic(5) + "@sphere-ex.com";
+    }
 }

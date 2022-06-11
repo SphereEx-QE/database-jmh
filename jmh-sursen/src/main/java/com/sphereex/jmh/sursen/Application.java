@@ -26,6 +26,6 @@ public class Application {
         InsertTableCommand insertTableCommand = new InsertTableCommand();
         dropTableCommand.execute(dataSource);
         createTableCommand.execute(dataSource);
-        insertTableCommand.execute(dataSource,"tb_f_user_cert10");
+        insertTableCommand.execute(dataSource,"tb_f_user_contact10");
     }
 }

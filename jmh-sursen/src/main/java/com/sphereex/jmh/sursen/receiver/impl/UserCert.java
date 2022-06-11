@@ -51,7 +51,7 @@ public class UserCert implements CommandReceiver {
         // version
         preparedStatement.setInt(11, 1);
         // updator
-        preparedStatement.setString(12, RandomDataUtil.getRandomName());
+        preparedStatement.setString(12, RandomDataUtil.getRandomUserName());
         // disable
         preparedStatement.setInt(13, 0);
     }

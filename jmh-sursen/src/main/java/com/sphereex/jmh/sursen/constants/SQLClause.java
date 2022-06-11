@@ -47,8 +47,8 @@ public interface SQLClause {
             "  `id` varchar(64) NOT NULL COMMENT '主键',\n" +
             "  `user_id` varchar(64) NOT NULL COMMENT '用户ID',\n" +
             "  `area_code` varchar(6) NOT NULL COMMENT '手机区号',\n" +
-            "  `phone` varchar(15) NOT NULL COMMENT '手机号',\n" +
-            "  `email` varchar(64) DEFAULT NULL COMMENT '邮箱',\n" +
+            "  `phone` varchar(80) NOT NULL COMMENT '手机号',\n" +
+            "  `email` varchar(80) DEFAULT NULL COMMENT '邮箱',\n" +
             "  `master` tinyint(1) NOT NULL COMMENT '主证件标识',\n" +
             "  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',\n" +
             "  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',\n" +
