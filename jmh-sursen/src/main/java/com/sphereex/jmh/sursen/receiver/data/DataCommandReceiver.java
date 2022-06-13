@@ -1,9 +1,9 @@
-package com.sphereex.jmh.sursen.receiver;
+package com.sphereex.jmh.sursen.receiver.data;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
 
-public interface CommandReceiver {
+public interface DataCommandReceiver {
 
     void insertData(DataSource dataSource, int tableSize) throws SQLException;
 

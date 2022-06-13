@@ -1,14 +1,13 @@
 package com.sphereex.jmh.sursen;
 
-import com.sphereex.jmh.sursen.command.data.impl.CreateTableCommand;
-import com.sphereex.jmh.sursen.command.data.impl.DropTableCommand;
-import com.sphereex.jmh.sursen.command.data.impl.InsertTableCommand;
 import org.apache.shardingsphere.driver.api.yaml.YamlShardingSphereDataSourceFactory;
 
 import javax.sql.DataSource;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Properties;
 
 public class Application {
     
@@ -21,11 +20,15 @@ public class Application {
         DataSource dataSource = YamlShardingSphereDataSourceFactory.createDataSource(new File("/Users/nianjun/Work" +
                 "/Workspace/database-jmh/jmh-sursen/src/main/resources/config-encrypt.yaml"));
         //dataSource.getConnection().createStatement().execute(SQLClause.USER_CERT_10_CREATION);
-        CreateTableCommand createTableCommand = new CreateTableCommand();
-        DropTableCommand dropTableCommand = new DropTableCommand();
-        InsertTableCommand insertTableCommand = new InsertTableCommand();
-        dropTableCommand.execute(dataSource);
-        createTableCommand.execute(dataSource);
-        insertTableCommand.execute(dataSource,"tb_f_user_contact10");
+//        CreateTableCommand createTableCommand = new CreateTableCommand();
+//        DropTableCommand dropTableCommand = new DropTableCommand();
+//        InsertTableCommand insertTableCommand = new InsertTableCommand();
+//        dropTableCommand.execute(dataSource);
+//        createTableCommand.execute(dataSource);
+//        insertTableCommand.execute(dataSource,"tb_f_user_contact10");
+        Properties properties = new Properties();
+        properties.load(new FileReader("/Users/nianjun/Work/Workspace/database-jmh/jmh-sursen/src/main/resources/sql_sample.properties"));
+        System.out.println("---------------------------------");
+        System.out.println(properties.getProperty("SELECT_FROM_USER_WHERE_NAME"));
     }
 }

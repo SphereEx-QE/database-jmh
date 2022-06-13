@@ -3,9 +3,9 @@ package com.sphereex.jmh.sursen.command.data.impl;
 import com.sphereex.jmh.sursen.command.data.DataCommand;
 import com.sphereex.jmh.sursen.command.SpecificDataCommand;
 import com.sphereex.jmh.sursen.constants.CommandConstant;
-import com.sphereex.jmh.sursen.receiver.impl.User;
-import com.sphereex.jmh.sursen.receiver.impl.UserCert;
-import com.sphereex.jmh.sursen.receiver.impl.UserContact;
+import com.sphereex.jmh.sursen.receiver.data.impl.User;
+import com.sphereex.jmh.sursen.receiver.data.impl.UserCert;
+import com.sphereex.jmh.sursen.receiver.data.impl.UserContact;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;

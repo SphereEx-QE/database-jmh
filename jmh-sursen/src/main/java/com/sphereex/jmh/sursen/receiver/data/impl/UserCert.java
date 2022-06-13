@@ -1,6 +1,7 @@
-package com.sphereex.jmh.sursen.receiver.impl;
+package com.sphereex.jmh.sursen.receiver.data.impl;
 
-import com.sphereex.jmh.sursen.receiver.CommandReceiver;
+import com.sphereex.jmh.sursen.receiver.data.DataCommandReceiver;
+import com.sphereex.jmh.sursen.util.CardNumberUtil;
 import com.sphereex.jmh.sursen.util.RandomDataUtil;
 import com.sphereex.jmh.sursen.util.TableNameUtil;
 
@@ -9,15 +10,15 @@ import java.sql.*;
 import java.util.Calendar;
 import java.util.UUID;
 
-public class UserContact implements CommandReceiver {
+public class UserCert implements DataCommandReceiver {
 
     @Override
     public void insertData(DataSource dataSource, int tableSize) throws SQLException {
         Connection connection = dataSource.getConnection();
         PreparedStatement preparedStatement = null;
         String tableName = "";
-        String INSERT_CLAUSE = "insert into TABLE_NAME values (?,?,?,?,?,?,?,?,?,?,?)";
-        tableName = TableNameUtil.getTableNameThroughSize("tb_f_user_contact", tableSize);
+        String INSERT_CLAUSE = "insert into TABLE_NAME values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        tableName = TableNameUtil.getTableNameThroughSize("tb_f_user_cert", tableSize);
         preparedStatement = connection.prepareStatement(INSERT_CLAUSE.replace("TABLE_NAME", tableName));
         for (int i = 0; i < tableSize; i++) {
             setRandomDataForStatement(preparedStatement);
@@ -31,23 +32,27 @@ public class UserContact implements CommandReceiver {
         preparedStatement.setString(1, UUID.randomUUID().toString());
         // user_id
         preparedStatement.setString(2, UUID.randomUUID().toString());
-        // area_code
-        preparedStatement.setString(3, "+86");
-        // phone
-        preparedStatement.setString(4, RandomDataUtil.getRandomMobileNumber());
-        // email
-        preparedStatement.setString(5, RandomDataUtil.getRandomEmailAddress());
+        // cert_type
+        preparedStatement.setString(3, "身份证");
+        // cert_key
+        preparedStatement.setString(4, CardNumberUtil.getRandomID());
+        // issuing_unit
+        preparedStatement.setString(5, "公安机关");
+        // effective_date
+        preparedStatement.setDate(6, new Date(System.currentTimeMillis()));
+        // expire_date
+        preparedStatement.setDate(7, new Date(System.currentTimeMillis() + 315360000000L));
         // master
-        preparedStatement.setInt(6, 1);
+        preparedStatement.setInt(8, 1);
         // create_time
-        preparedStatement.setTimestamp(7, now);
+        preparedStatement.setTimestamp(9, now);
         // update_time
-        preparedStatement.setTimestamp(8, now);
+        preparedStatement.setTimestamp(10, now);
         // version
-        preparedStatement.setInt(9, 1);
+        preparedStatement.setInt(11, 1);
         // updator
-        preparedStatement.setString(10, RandomDataUtil.getRandomUserName());
+        preparedStatement.setString(12, RandomDataUtil.getRandomUserName());
         // disable
-        preparedStatement.setInt(11, 0);
+        preparedStatement.setInt(13, 0);
     }
 }
