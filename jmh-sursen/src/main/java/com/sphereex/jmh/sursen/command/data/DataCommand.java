@@ -1,4 +1,4 @@
-package com.sphereex.jmh.sursen.command;
+package com.sphereex.jmh.sursen.command.data;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;

@@ -1,6 +1,6 @@
-package com.sphereex.jmh.sursen.command.impl;
+package com.sphereex.jmh.sursen.command.data.impl;
 
-import com.sphereex.jmh.sursen.command.DataCommand;
+import com.sphereex.jmh.sursen.command.data.DataCommand;
 import com.sphereex.jmh.sursen.command.SpecificDataCommand;
 import com.sphereex.jmh.sursen.constants.CommandConstant;
 import com.sphereex.jmh.sursen.receiver.impl.EmptyCommand;

@@ -1,8 +1,8 @@
 package com.sphereex.jmh.sursen;
 
-import com.sphereex.jmh.sursen.command.impl.CreateTableCommand;
-import com.sphereex.jmh.sursen.command.impl.DropTableCommand;
-import com.sphereex.jmh.sursen.command.impl.InsertTableCommand;
+import com.sphereex.jmh.sursen.command.data.impl.CreateTableCommand;
+import com.sphereex.jmh.sursen.command.data.impl.DropTableCommand;
+import com.sphereex.jmh.sursen.command.data.impl.InsertTableCommand;
 import org.apache.shardingsphere.driver.api.yaml.YamlShardingSphereDataSourceFactory;
 
 import javax.sql.DataSource;

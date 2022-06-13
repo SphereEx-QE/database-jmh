@@ -1,6 +1,6 @@
-package com.sphereex.jmh.sursen.command.impl;
+package com.sphereex.jmh.sursen.command.data.impl;
 
-import com.sphereex.jmh.sursen.command.DataCommand;
+import com.sphereex.jmh.sursen.command.data.DataCommand;
 import com.sphereex.jmh.sursen.command.SpecificDataCommand;
 import com.sphereex.jmh.sursen.constants.CommandConstant;
 import com.sphereex.jmh.sursen.receiver.impl.User;
@@ -25,15 +25,16 @@ public class InsertTableCommand implements DataCommand, SpecificDataCommand {
     @Override
     public void execute(DataSource dataSource, String tableName) throws SQLException {
         int tableSize = Integer.parseInt(tableName.substring(tableName.lastIndexOf("1"))) * 10_000;
-        if (tableName.startsWith("tb_f_user")) {
+        String realTableName = tableName.substring(0, tableName.lastIndexOf("1"));
+        if ("tb_f_user".equals(realTableName)) {
             User user = new User();
             user.insertData(dataSource, tableSize);
         }
-        if (tableName.startsWith("tb_f_user_cert")) {
+        if ("tb_f_user_cert".equals(realTableName)) {
             UserCert userCert = new UserCert();
             userCert.insertData(dataSource, tableSize);
         }
-        if (tableName.startsWith("tb_f_user_contact")) {
+        if ("tb_f_user_contact".equals(realTableName)) {
             UserContact userContact = new UserContact();
             userContact.insertData(dataSource, tableSize);
         }
