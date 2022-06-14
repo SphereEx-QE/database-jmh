@@ -17,7 +17,7 @@ public class UserCert implements DataCommandReceiver {
         Connection connection = dataSource.getConnection();
         PreparedStatement preparedStatement = null;
         String tableName = "";
-        String INSERT_CLAUSE = "insert into TABLE_NAME values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String INSERT_CLAUSE = "insert into TABLE_NAME values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         tableName = TableNameUtil.getTableNameThroughSize("tb_f_user_cert", tableSize);
         preparedStatement = connection.prepareStatement(INSERT_CLAUSE.replace("TABLE_NAME", tableName));
         for (int i = 0; i < tableSize; i++) {
@@ -34,25 +34,27 @@ public class UserCert implements DataCommandReceiver {
         preparedStatement.setString(2, UUID.randomUUID().toString());
         // cert_type
         preparedStatement.setString(3, "身份证");
-        // cert_key
+        // cert_no
         preparedStatement.setString(4, CardNumberUtil.getRandomID());
+        // cert_key
+        preparedStatement.setString(5, "身份证");
         // issuing_unit
-        preparedStatement.setString(5, "公安机关");
+        preparedStatement.setString(6, "公安机关");
         // effective_date
-        preparedStatement.setDate(6, new Date(System.currentTimeMillis()));
+        preparedStatement.setDate(7, new Date(System.currentTimeMillis()));
         // expire_date
-        preparedStatement.setDate(7, new Date(System.currentTimeMillis() + 315360000000L));
+        preparedStatement.setDate(8, new Date(System.currentTimeMillis() + 315360000000L));
         // master
-        preparedStatement.setInt(8, 1);
+        preparedStatement.setInt(9, 1);
         // create_time
-        preparedStatement.setTimestamp(9, now);
-        // update_time
         preparedStatement.setTimestamp(10, now);
+        // update_time
+        preparedStatement.setTimestamp(11, now);
         // version
-        preparedStatement.setInt(11, 1);
+        preparedStatement.setInt(12, 1);
         // updator
-        preparedStatement.setString(12, RandomDataUtil.getRandomUserName());
+        preparedStatement.setString(13, RandomDataUtil.getRandomUserName());
         // disable
-        preparedStatement.setInt(13, 0);
+        preparedStatement.setInt(14, 0);
     }
 }

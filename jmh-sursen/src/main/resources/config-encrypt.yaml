@@ -19,129 +19,138 @@ rules:
         type: AES
         props:
           aes-key-value: 123456abc
-#      sm4_encryptor:
-#        type: SM4
-#        props:
-#          sm4-key: 4D744E003D713D054E7E407C350E447E
-#          sm4-mode: ECB
-#          sm4-padding: PKCS5Padding
+      sm4_encryptor:
+        type: SM4
+        props:
+          sm4-key: 4D744E003D713D054E7E407C350E447E
+          sm4-mode: ECB
+          sm4-padding: PKCS5Padding
     tables:
       tb_f_user10:
         columns:
           birthday:
-            plainColumn: birthday_plain
+            dataType: DATE
             cipherColumn: birthday_cipher
-            encryptorName: aes_encryptor
+            cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
+            encryptorName: sm4_encryptor
           name:
-            plainColumn: name_plain
             cipherColumn: name_cipher
-            encryptorName: aes_encryptor
+            cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
+            encryptorName: sm4_encryptor
           contact_person:
-            plainColumn: contact_person_plain
             cipherColumn: contact_person_cipher
-            encryptorName: aes_encryptor
+            cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
+            encryptorName: sm4_encryptor
       tb_f_user_cert10:
         columns:
           cert_no:
-            plainColumn: cert_no_plain
             cipherColumn: cert_no_cipher
-            encryptorName: aes_encryptor
+            cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
+            encryptorName: sm4_encryptor
           effective_date:
-            plainColumn: effective_date_plain
+            dataType: DATE
             cipherColumn: effective_date_cipher
-            encryptorName: aes_encryptor
+            cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
+            encryptorName: sm4_encryptor
           expire_date:
-            plainColumn: expire_date_plain
+            dataType: DATE
             cipherColumn: expire_date_cipher
-            encryptorName: aes_encryptor
+            cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
+            encryptorName: sm4_encryptor
       tb_f_user_contact10:
         columns:
           phone:
-            plainColumn: phone_plain
             cipherColumn: phone_cipher
-            encryptorName: aes_encryptor
+            cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
+            encryptorName: sm4_encryptor
           email:
-            plainColumn: email_plain
             cipherColumn: email_cipher
-            encryptorName: aes_encryptor
+            cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
+            encryptorName: sm4_encryptor
 
       tb_f_user100:
         columns:
           birthday:
-            plainColumn: birthday_plain
+            dataType: DATE
             cipherColumn: birthday_cipher
-            encryptorName: aes_encryptor
+            cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
+            encryptorName: sm4_encryptor
           name:
-            plainColumn: name_plain
             cipherColumn: name_cipher
-            encryptorName: aes_encryptor
+            cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
+            encryptorName: sm4_encryptor
           contact_person:
-            plainColumn: contact_person_plain
             cipherColumn: contact_person_cipher
-            encryptorName: aes_encryptor
+            cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
+            encryptorName: sm4_encryptor
       tb_f_user_cert100:
         columns:
           cert_no:
-            plainColumn: cert_no_plain
             cipherColumn: cert_no_cipher
-            encryptorName: aes_encryptor
+            cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
+            encryptorName: sm4_encryptor
           effective_date:
-            plainColumn: effective_date_plain
+            dataType: DATE
             cipherColumn: effective_date_cipher
-            encryptorName: aes_encryptor
+            cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
+            encryptorName: sm4_encryptor
           expire_date:
-            plainColumn: expire_date_plain
+            dataType: DATE
             cipherColumn: expire_date_cipher
-            encryptorName: aes_encryptor
+            cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
+            encryptorName: sm4_encryptor
       tb_f_user_contact100:
         columns:
           phone:
-            plainColumn: phone_plain
             cipherColumn: phone_cipher
-            encryptorName: aes_encryptor
+            cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
+            encryptorName: sm4_encryptor
           email:
-            plainColumn: email_plain
             cipherColumn: email_cipher
-            encryptorName: aes_encryptor
+            cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
+            encryptorName: sm4_encryptor
 
       tb_f_user1000:
         columns:
           birthday:
-            plainColumn: birthday_plain
+            dataType: DATE
             cipherColumn: birthday_cipher
-            encryptorName: aes_encryptor
+            cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
+            encryptorName: sm4_encryptor
           name:
-            plainColumn: name_plain
             cipherColumn: name_cipher
-            encryptorName: aes_encryptor
+            cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
+            encryptorName: sm4_encryptor
           contact_person:
-            plainColumn: contact_person_plain
             cipherColumn: contact_person_cipher
-            encryptorName: aes_encryptor
+            cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
+            encryptorName: sm4_encryptor
       tb_f_user_cert1000:
         columns:
           cert_no:
-            plainColumn: cert_no_plain
             cipherColumn: cert_no_cipher
-            encryptorName: aes_encryptor
+            cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
+            encryptorName: sm4_encryptor
           effective_date:
-            plainColumn: effective_date_plain
+            dataType: DATE
             cipherColumn: effective_date_cipher
-            encryptorName: aes_encryptor
+            cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
+            encryptorName: sm4_encryptor
           expire_date:
-            plainColumn: expire_date_plain
+            dataType: DATE
             cipherColumn: expire_date_cipher
-            encryptorName: aes_encryptor
+            cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
+            encryptorName: sm4_encryptor
       tb_f_user_contact1000:
         columns:
           phone:
-            plainColumn: phone_plain
             cipherColumn: phone_cipher
-            encryptorName: aes_encryptor
+            cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
+            encryptorName: sm4_encryptor
           email:
-            plainColumn: email_plain
             cipherColumn: email_cipher
-            encryptorName: aes_encryptor
+            cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
+            encryptorName: sm4_encryptor
             
 props:
   sql-show: false

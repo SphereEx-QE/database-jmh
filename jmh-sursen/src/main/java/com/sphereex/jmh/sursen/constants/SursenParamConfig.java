@@ -1,23 +1,29 @@
 package com.sphereex.jmh.sursen.constants;
 
+import lombok.Getter;
+
+@Getter
 public class SursenParamConfig {
 
-    private final String TABLE_SIZE;
+    private final String configFile;
 
-    private final String TABLE_NAME;
+    private final String tableName;
+    
+    private final String command;
 
-    private final String CONFIG_FILE;
-
-    private static SursenParamConfig INSTANCE;
-
-    private SursenParamConfig() {
-        TABLE_SIZE = System.getProperty("table_size");
-        TABLE_NAME = System.getProperty("table_name");
-        CONFIG_FILE = System.getProperty("configFile");
-        INSTANCE = new SursenParamConfig();
-    }
-
-    public static SursenParamConfig getInstance() {
-        return INSTANCE;
+    public SursenParamConfig(String configFile, String tableName, String command) {
+        this.configFile = configFile;
+        this.tableName = tableName;
+        if (command == null) {
+            this.command = "init";
+        } else {
+            this.command = command;
+        }
+        if (configFile == null) {
+            throw new IllegalArgumentException(" configFile is not set");
+        }
+        if (tableName == null) {
+            throw new IllegalArgumentException(" tableName is not set");
+        }
     }
 }

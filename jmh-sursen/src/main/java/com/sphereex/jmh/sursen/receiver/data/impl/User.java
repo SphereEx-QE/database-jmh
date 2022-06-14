@@ -38,7 +38,7 @@ public class User implements DataCommandReceiver {
         // name
         preparedStatement.setString(2, RandomDataUtil.getRandomUserName());
         // birthday
-        preparedStatement.setString(3, RandomDataUtil.getRandomBirthDayStr());
+        preparedStatement.setDate(3, RandomDataUtil.getRandomBirthDay());
         // gender
         preparedStatement.setInt(4, RandomDataUtil.getRandomGender());
         // nationality

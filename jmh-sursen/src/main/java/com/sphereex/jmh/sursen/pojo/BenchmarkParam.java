@@ -10,6 +10,8 @@ import java.sql.PreparedStatement;
 @State(Scope.Thread)
 public class BenchmarkParam {
     
+    private int tableSize;
+    
     private int threads;
     
     private PreparedStatement preparedStatement;

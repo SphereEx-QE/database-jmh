@@ -1,7 +1,7 @@
 package com.sphereex.jmh.sursen.command.data.impl;
 
-import com.sphereex.jmh.sursen.command.data.DataCommand;
 import com.sphereex.jmh.sursen.command.SpecificDataCommand;
+import com.sphereex.jmh.sursen.command.data.DataCommand;
 import com.sphereex.jmh.sursen.constants.CommandConstant;
 import com.sphereex.jmh.sursen.constants.SQLClause;
 
@@ -22,7 +22,19 @@ public class CreateTableCommand implements DataCommand, SpecificDataCommand {
 
     @Override
     public void execute(DataSource dataSource, String tableName) throws SQLException {
-
+        EmptyCommand emptyCommand = new EmptyCommand();
+        String realTableName = tableName.substring(0, tableName.lastIndexOf("1"));
+        String createTableSQL = "";
+        if ("tb_f_user".equals(realTableName)) {
+            createTableSQL = SQLClause.USER_CREATION.replace("TABLE_NAME", tableName);
+        }
+        if ("tb_f_user_cert".equals(realTableName)) {
+            createTableSQL = SQLClause.USER_CERT_CREATION.replace("TABLE_NAME", tableName);
+        }
+        if ("tb_f_user_contact".equals(realTableName)) {
+            createTableSQL = SQLClause.USER_CONTACT_CREATION.replace("TABLE_NAME", tableName);
+        }
+        emptyCommand.createTable(dataSource, createTableSQL);
     }
 
     private void createAllTable(DataSource dataSource) throws SQLException {

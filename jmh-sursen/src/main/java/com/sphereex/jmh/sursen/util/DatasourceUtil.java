@@ -9,8 +9,7 @@ import java.io.File;
 public class DatasourceUtil {
 
     @SneakyThrows
-    public static DataSource createDataSource() {
-        String configurationFile = System.getProperty("configFile");
+    public static DataSource createDataSource(String configurationFile) {
         return YamlShardingSphereDataSourceFactory.createDataSource(new File(configurationFile));
     }
 }

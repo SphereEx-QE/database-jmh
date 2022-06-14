@@ -18,7 +18,7 @@ public class RandomDataUtil {
 
     public static Date getRandomBirthDay() {
         Calendar calendar = Calendar.getInstance();
-        calendar.set(RANDOM.nextInt(1950, 2020), RANDOM.nextInt(11), RANDOM.nextInt(28));
+        calendar.set(RANDOM.nextInt(1950, 2010), RANDOM.nextInt(11), RANDOM.nextInt(28));
         return new Date(calendar.getTimeInMillis());
     }
 
