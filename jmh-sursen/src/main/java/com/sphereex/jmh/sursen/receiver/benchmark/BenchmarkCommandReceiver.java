@@ -1,8 +1,8 @@
 package com.sphereex.jmh.sursen.receiver.benchmark;
 
-import org.apache.calcite.prepare.Prepare;
+import java.sql.PreparedStatement;
 
 public interface BenchmarkCommandReceiver {
     
-    void initBenchmark(Prepare statement);
+    void initBenchmark(PreparedStatement preparedStatement);
 }
