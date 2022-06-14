@@ -10,7 +10,7 @@
     <name>JMH benchmark: ShardingSphere 5</name>
 
     <properties>
-        <shardingsphere.version>5.1.1</shardingsphere.version>
+        <shardingsphere.version>5.1.2-SNAPSHOT</shardingsphere.version>
     </properties>
 
     <dependencies>
@@ -21,17 +21,17 @@
         </dependency>
         <dependency>
             <groupId>org.apache.shardingsphere</groupId>
-            <artifactId>shardingsphere-traffic-core</artifactId>
+            <artifactId>shardingsphere-encrypt-core</artifactId>
+            <version>${shardingsphere.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shardingsphere</groupId>
+            <artifactId>shardingsphere-encrypt-sm</artifactId>
             <version>${shardingsphere.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.shardingsphere</groupId>
             <artifactId>shardingsphere-jdbc-core</artifactId>
-            <version>${shardingsphere.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.shardingsphere</groupId>
-            <artifactId>shardingsphere-db-protocol-postgresql</artifactId>
             <version>${shardingsphere.version}</version>
         </dependency>
         <dependency>

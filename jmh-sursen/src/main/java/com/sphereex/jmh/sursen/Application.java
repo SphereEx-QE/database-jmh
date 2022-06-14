@@ -7,13 +7,15 @@ import com.sphereex.jmh.sursen.constants.SursenParamConfig;
 import com.sphereex.jmh.sursen.util.DatasourceUtil;
 
 import javax.sql.DataSource;
+import java.io.FileReader;
 import java.io.IOException;
 import java.sql.SQLException;
 
 public class Application {
 
     public static void main(String... args) throws SQLException, IOException {
-        executeCommand();
+//        executeCommand();
+        prepareData();
     }
 
     private static void executeCommand() throws SQLException {
@@ -55,5 +57,17 @@ public class Application {
                 insertTableCommand.execute(dataSource, sursenParamConfig.getTableName());
             }
         }
+    }
+    
+    private static void prepareData() throws IOException, SQLException {
+        FileReader fileReader = new FileReader(System.getProperty("prepareSQL"));
+        StringBuilder stringBuilder = new StringBuilder();
+        int length = 0;
+        while ((length=fileReader.read()) != -1) {
+            stringBuilder.append((char)length);
+        }
+        DataSource dataSource = DatasourceUtil.createDataSource(System.getProperty("configFile"));
+        dataSource.getConnection().createStatement().execute(stringBuilder.toString());
+        System.out.println(stringBuilder.toString());
     }
 }
