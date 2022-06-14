@@ -21,7 +21,7 @@ public class SurSenUpdateUserBenchmark extends SurSenUpdateUser {
     }
 
     @Override
-    public String getTableName() {
-        return ShardingSpheres.getTableName();
+    public String getTableSize() {
+        return ShardingSpheres.getTableSize();
     }
 }

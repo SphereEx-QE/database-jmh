@@ -16,8 +16,8 @@ public abstract class SurSenSelectUser implements JDBCConnectionProvider, SurSen
     @Setup(Level.Trial)
     public void setup() throws Exception {
         updateStatement =
-                getConnection().prepareStatement(("select * from TABLE_NAME where name = ?;").replace("TABLE_NAME",
-                        getTableName()));
+                getConnection().prepareStatement(("select * from tb_f_user$TABLE_SIZE where name = ?;").replace("$TABLE_SIZE",
+                        getTableSize()));
     }
 
     @Benchmark

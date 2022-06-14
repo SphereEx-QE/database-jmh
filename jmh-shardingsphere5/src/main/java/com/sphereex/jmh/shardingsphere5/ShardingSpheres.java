@@ -17,7 +17,7 @@ public final class ShardingSpheres {
         return YamlShardingSphereDataSourceFactory.createDataSource(new File(configurationFile));
     }
     
-    public static String getTableName() {
-        return System.getProperty("tableName");
+    public static String getTableSize() {
+        return System.getProperty("tableSize");
     }
 }

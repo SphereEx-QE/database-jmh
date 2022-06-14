@@ -16,7 +16,8 @@ public abstract class SurSenUpdateUserCert implements JDBCConnectionProvider, Su
     @Setup(Level.Trial)
     public void setup() throws Exception {
         updateStatement =
-                getConnection().prepareStatement(("update TABLE_NAME set cert_type = 'IDENTITY_CARD' where expire_date < '2033-12-30' ;").replace("TABLE_NAME", getTableName()));
+                getConnection().prepareStatement(("update tb_f_user_cert$TABLE_SIZE set cert_type = 'IDENTITY_CARD' " +
+                        "where expire_date < '2033-12-30' ;").replace("$TABLE_SIZE", getTableSize()));
     }
 
     @Benchmark

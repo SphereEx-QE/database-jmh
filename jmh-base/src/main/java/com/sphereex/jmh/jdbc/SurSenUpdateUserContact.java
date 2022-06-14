@@ -16,8 +16,8 @@ public abstract class SurSenUpdateUserContact implements JDBCConnectionProvider,
     @Setup(Level.Trial)
     public void setup() throws Exception {
         updateStatement =
-                getConnection().prepareStatement(("update TABLE_NAME set area_code = '86' where phone like " +
-                        "'156%';").replace("TABLE_NAME", getTableName()));
+                getConnection().prepareStatement(("update tb_f_user_contact$TABLE_SIZE set area_code = '86' where phone like " +
+                        "'156%';").replace("$TABLE_SIZE", getTableSize()));
     }
 
     @Benchmark
