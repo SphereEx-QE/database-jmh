@@ -11,11 +11,11 @@ public abstract class SurSenSelectUnion implements JDBCConnectionProvider, SurSe
 
     private final ThreadLocalRandom random = ThreadLocalRandom.current();
 
-    private PreparedStatement updateStatement;
+    private PreparedStatement selectStatement;
 
     @Setup(Level.Trial)
     public void setup() throws Exception {
-        updateStatement =
+        selectStatement =
                 getConnection().prepareStatement(("select a.name from tb_f_user$TABLE_SIZE a, tb_f_user_cert$TABLE_SIZE b, " +
                         "tb_f_user_contact$TABLE_SIZE c where a.id = b.user_id and a.id = c.user_id and b.cert_no = ? and a" +
                         ".name = ? and c.phone = ?;").replaceAll("$TABLE_SIZE",
@@ -24,11 +24,13 @@ public abstract class SurSenSelectUnion implements JDBCConnectionProvider, SurSe
 
     @Benchmark
     public void batchInserts() throws Exception {
-        updateStatement.execute();
+        selectStatement.setString(1, "111111111111111111");
+        selectStatement.setString(2, "19999999999");
+        selectStatement.execute();
     }
 
     @TearDown(Level.Trial)
     public void tearDown() throws Exception {
-        updateStatement.close();
+        selectStatement.close();
     }
 }

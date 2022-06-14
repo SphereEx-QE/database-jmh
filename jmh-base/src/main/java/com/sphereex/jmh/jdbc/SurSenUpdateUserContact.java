@@ -22,7 +22,6 @@ public abstract class SurSenUpdateUserContact implements JDBCConnectionProvider,
 
     @Benchmark
     public void batchInserts() throws Exception {
-        updateStatement.setString(1, "TEST_USER_10");
         updateStatement.execute();
     }
 
