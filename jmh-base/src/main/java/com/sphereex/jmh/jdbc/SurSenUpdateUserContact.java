@@ -1,6 +1,5 @@
 package com.sphereex.jmh.jdbc;
 
-import com.sphereex.jmh.util.Strings;
 import org.openjdk.jmh.annotations.*;
 
 import java.sql.PreparedStatement;
@@ -8,7 +7,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 @BenchmarkMode(Mode.SingleShotTime)
 @State(Scope.Thread)
-public abstract class SurSenUpdateUser implements JDBCConnectionProvider, SurSenTableProvider {
+public abstract class SurSenUpdateUserContact implements JDBCConnectionProvider, SurSenTableProvider {
 
     private final ThreadLocalRandom random = ThreadLocalRandom.current();
 
@@ -17,8 +16,8 @@ public abstract class SurSenUpdateUser implements JDBCConnectionProvider, SurSen
     @Setup(Level.Trial)
     public void setup() throws Exception {
         updateStatement =
-                getConnection().prepareStatement(("update TABLE_NAME set name = '" + Strings.randomString(10) +
-                        "'where name = ?;").replace("TABLE_NAME", getTableName()));
+                getConnection().prepareStatement(("update TABLE_NAME set area_code = '86' where phone like " +
+                        "'156%';").replace("TABLE_NAME", getTableName()));
     }
 
     @Benchmark

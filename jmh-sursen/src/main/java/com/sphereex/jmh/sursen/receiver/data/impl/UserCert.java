@@ -43,7 +43,7 @@ public class UserCert implements DataCommandReceiver {
         // effective_date
         preparedStatement.setDate(7, new Date(System.currentTimeMillis()));
         // expire_date
-        preparedStatement.setDate(8, new Date(System.currentTimeMillis() + 315360000000L));
+        preparedStatement.setDate(8, new Date(2079273600000L));
         // master
         preparedStatement.setInt(9, 1);
         // create_time

@@ -7,6 +7,7 @@ import com.sphereex.jmh.sursen.constants.SursenParamConfig;
 import com.sphereex.jmh.sursen.util.DatasourceUtil;
 
 import javax.sql.DataSource;
+import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -14,7 +15,7 @@ import java.sql.SQLException;
 public class Application {
 
     public static void main(String... args) throws SQLException, IOException {
-//        executeCommand();
+        executeCommand();
         prepareData();
     }
 
@@ -58,16 +59,15 @@ public class Application {
             }
         }
     }
-    
+
     private static void prepareData() throws IOException, SQLException {
         FileReader fileReader = new FileReader(System.getProperty("prepareSQL"));
-        StringBuilder stringBuilder = new StringBuilder();
-        int length = 0;
-        while ((length=fileReader.read()) != -1) {
-            stringBuilder.append((char)length);
-        }
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
         DataSource dataSource = DatasourceUtil.createDataSource(System.getProperty("configFile"));
-        dataSource.getConnection().createStatement().execute(stringBuilder.toString());
-        System.out.println(stringBuilder.toString());
+        String line;
+        while ((line = bufferedReader.readLine()) != null) {
+            System.out.println(line);
+            dataSource.getConnection().createStatement().execute(line);
+        }
     }
 }
