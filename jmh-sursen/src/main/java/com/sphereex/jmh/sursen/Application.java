@@ -66,7 +66,6 @@ public class Application {
         DataSource dataSource = DatasourceUtil.createDataSource(System.getProperty("configFile"));
         String line;
         while ((line = bufferedReader.readLine()) != null) {
-            System.out.println(line);
             dataSource.getConnection().createStatement().execute(line);
         }
     }
