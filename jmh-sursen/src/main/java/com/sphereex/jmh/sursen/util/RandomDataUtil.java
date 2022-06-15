@@ -41,7 +41,11 @@ public class RandomDataUtil {
     }
 
     public static String getRandomMobileNumber() {
-        return RANDOM.nextInt(130, 199) + RandomStringUtils.randomNumeric(8);
+        int randomPrefix = RANDOM.nextInt(130, 198);
+        while (randomPrefix == 159) {
+            randomPrefix = RANDOM.nextInt(130, 198);
+        }
+        return randomPrefix + RandomStringUtils.randomNumeric(8);
     }
 
     public static String getRandomEmailAddress() {
