@@ -15,11 +15,15 @@ import java.sql.SQLException;
 public class Application {
 
     public static void main(String... args) throws SQLException, IOException {
-//        executeCommand();
-        prepareData();
+        String command = System.getProperty("command");
+        if ("prepare".equals(command)) {
+            executePrepareCommand();
+        } else {
+            executeDataCommand();
+        }
     }
 
-    private static void executeCommand() throws SQLException {
+    private static void executeDataCommand() throws SQLException {
         SursenParamConfig sursenParamConfig = new SursenParamConfig(System.getProperty("configFile"),
                 System.getProperty("tableName"), System.getProperty("command"));
         DataSource dataSource = DatasourceUtil.createDataSource(sursenParamConfig.getConfigFile());
@@ -44,7 +48,7 @@ public class Application {
                 dropTableCommand.execute(dataSource, sursenParamConfig.getTableName());
             }
         }
-        if ("createTable".equals(sursenParamConfig.getCommand())) {
+        if ("create".equals(sursenParamConfig.getCommand())) {
             if (sursenParamConfig.getTableName() == null || "".equals(sursenParamConfig.getTableName().trim())) {
                 createTableCommand.execute(dataSource);
             } else {
@@ -60,7 +64,7 @@ public class Application {
         }
     }
 
-    private static void prepareData() throws IOException, SQLException {
+    private static void executePrepareCommand() throws IOException, SQLException {
         FileReader fileReader = new FileReader(System.getProperty("prepareSQL"));
         BufferedReader bufferedReader = new BufferedReader(fileReader);
         DataSource dataSource = DatasourceUtil.createDataSource(System.getProperty("configFile"));
