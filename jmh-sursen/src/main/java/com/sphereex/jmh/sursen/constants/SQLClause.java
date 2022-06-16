@@ -15,7 +15,7 @@ public interface SQLClause {
             "  `updator` varchar(64) DEFAULT NULL COMMENT '更新人',\n" +
             "  `disable` tinyint(1) NOT NULL DEFAULT '0' COMMENT '逻辑删除标识',\n" +
             "  PRIMARY KEY (`id`),\n" +
-            "  KEY `tb_f_user_name_index` (`name`),\n" +
+//            "  KEY `tb_f_user_name_index` (`name`),\n" +
             "  KEY `tb_f_user_nationality_index` (`nationality`),\n" +
             "  KEY `tb_f_user_create_time_index` (`create_time`) USING BTREE,\n" +
             "  KEY `tb_f_user_update_time_index` (`update_time`) USING BTREE\n" +
@@ -37,6 +37,8 @@ public interface SQLClause {
             "  `updator` varchar(64) DEFAULT NULL COMMENT '更新人',\n" +
             "  `disable` tinyint(1) NOT NULL DEFAULT '0' COMMENT '逻辑删除标识',\n" +
             "  PRIMARY KEY (`id`),\n" +
+//            "  KEY `tb_f_user_cert_cert_no_index` (`cert_no`),\n" +
+//            "  KEY `tb_f_user_cert_expire_date_end_index` (`expire_date`),\n" +
             "  KEY `tb_f_user_cert_user_id_index` (`user_id`),\n" +
             "  KEY `tb_f_user_cert_cert_key_index` (`cert_key`),\n" +
             "  KEY `tb_f_user_create_time_index` (`create_time`) USING BTREE,\n" +
@@ -58,6 +60,8 @@ public interface SQLClause {
             "  `updator` varchar(64) DEFAULT NULL COMMENT '更新人',\n" +
             "  `disable` tinyint(1) NOT NULL DEFAULT '0' COMMENT '逻辑删除标识',\n" +
             "  PRIMARY KEY (`id`),\n" +
+//            "  KEY `tb_f_user_contact_email_index` (`email`),\n" +
+//            "  KEY `tb_f_user_contact_phone_index` (`phone`),\n" +
             "  KEY `tb_f_user_contact_user_id_index` (`user_id`),\n" +
             "  KEY `tb_f_user_create_time_index` (`create_time`) USING BTREE,\n" +
             "  KEY `tb_f_user_update_time_index` (`update_time`) USING BTREE\n" +
