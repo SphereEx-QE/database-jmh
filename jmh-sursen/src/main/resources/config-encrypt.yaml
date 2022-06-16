@@ -32,45 +32,45 @@ rules:
             dataType: DATE
             cipherColumn: birthday_cipher
             cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
-            encryptorName: sm4_encryptor
+            encryptorName: aes_encryptor
           name:
             cipherColumn: name_cipher
             cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
-            encryptorName: sm4_encryptor
+            encryptorName: aes_encryptor
           contact_person:
             cipherColumn: contact_person_cipher
             cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
-            encryptorName: sm4_encryptor
+            encryptorName: aes_encryptor
       tb_f_user_cert10:
         columns:
           cert_no:
             cipherColumn: cert_no_cipher
             cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
-            encryptorName: sm4_encryptor
+            encryptorName: aes_encryptor
           effective_date:
             dataType: DATE
             cipherColumn: effective_date_cipher
             cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
-            encryptorName: sm4_encryptor
+            encryptorName: aes_encryptor
           expire_date:
             dataType: DATE
             cipherColumn: expire_date_cipher
             cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
-            encryptorName: sm4_encryptor
+            encryptorName: aes_encryptor
       tb_f_user_contact10:
         columns:
           phone:
             cipherColumn: phone_cipher
             cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
-            encryptorName: sm4_encryptor
+            encryptorName: aes_encryptor
           phone_prefix:
             cipherColumn: phone_prefix_cipher
             cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
-            encryptorName: sm4_encryptor
+            encryptorName: aes_encryptor
           email:
             cipherColumn: email_cipher
             cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
-            encryptorName: sm4_encryptor
+            encryptorName: aes_encryptor
 
       tb_f_user100:
         columns:
@@ -78,41 +78,45 @@ rules:
             dataType: DATE
             cipherColumn: birthday_cipher
             cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
-            encryptorName: sm4_encryptor
+            encryptorName: aes_encryptor
           name:
             cipherColumn: name_cipher
             cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
-            encryptorName: sm4_encryptor
+            encryptorName: aes_encryptor
           contact_person:
             cipherColumn: contact_person_cipher
             cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
-            encryptorName: sm4_encryptor
+            encryptorName: aes_encryptor
       tb_f_user_cert100:
         columns:
           cert_no:
             cipherColumn: cert_no_cipher
             cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
-            encryptorName: sm4_encryptor
+            encryptorName: aes_encryptor
           effective_date:
             dataType: DATE
             cipherColumn: effective_date_cipher
             cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
-            encryptorName: sm4_encryptor
+            encryptorName: aes_encryptor
           expire_date:
             dataType: DATE
             cipherColumn: expire_date_cipher
             cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
-            encryptorName: sm4_encryptor
+            encryptorName: aes_encryptor
       tb_f_user_contact100:
         columns:
           phone:
             cipherColumn: phone_cipher
             cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
-            encryptorName: sm4_encryptor
+            encryptorName: aes_encryptor
+          phone_prefix:
+            cipherColumn: phone_prefix_cipher
+            cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
+            encryptorName: aes_encryptor
           email:
             cipherColumn: email_cipher
             cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
-            encryptorName: sm4_encryptor
+            encryptorName: aes_encryptor
 
       tb_f_user1000:
         columns:
@@ -120,41 +124,45 @@ rules:
             dataType: DATE
             cipherColumn: birthday_cipher
             cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
-            encryptorName: sm4_encryptor
+            encryptorName: aes_encryptor
           name:
             cipherColumn: name_cipher
             cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
-            encryptorName: sm4_encryptor
+            encryptorName: aes_encryptor
           contact_person:
             cipherColumn: contact_person_cipher
             cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
-            encryptorName: sm4_encryptor
+            encryptorName: aes_encryptor
       tb_f_user_cert1000:
         columns:
           cert_no:
             cipherColumn: cert_no_cipher
             cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
-            encryptorName: sm4_encryptor
+            encryptorName: aes_encryptor
           effective_date:
             dataType: DATE
             cipherColumn: effective_date_cipher
             cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
-            encryptorName: sm4_encryptor
+            encryptorName: aes_encryptor
           expire_date:
             dataType: DATE
             cipherColumn: expire_date_cipher
             cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
-            encryptorName: sm4_encryptor
+            encryptorName: aes_encryptor
       tb_f_user_contact1000:
         columns:
           phone:
             cipherColumn: phone_cipher
             cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
-            encryptorName: sm4_encryptor
+            encryptorName: aes_encryptor
+          phone_prefix:
+            cipherColumn: phone_prefix_cipher
+            cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
+            encryptorName: aes_encryptor
           email:
             cipherColumn: email_cipher
             cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
-            encryptorName: sm4_encryptor
+            encryptorName: aes_encryptor
             
 props:
   sql-show: false
