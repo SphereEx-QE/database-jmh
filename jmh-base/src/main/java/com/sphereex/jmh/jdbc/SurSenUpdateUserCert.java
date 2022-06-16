@@ -21,7 +21,8 @@ public abstract class SurSenUpdateUserCert implements JDBCConnectionProvider, Su
     }
 
     @Benchmark
-    public void batchInserts() throws Exception {
+    @BenchmarkMode(Mode.AverageTime)
+    public void updateCertType() throws Exception {
         updateStatement.execute();
     }
 

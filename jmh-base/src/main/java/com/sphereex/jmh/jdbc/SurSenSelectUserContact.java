@@ -21,7 +21,8 @@ public abstract class SurSenSelectUserContact implements JDBCConnectionProvider,
     }
 
     @Benchmark
-    public void batchInserts() throws Exception {
+    @BenchmarkMode(Mode.AverageTime)
+    public void selectUserContact() throws Exception {
         selectStatement.execute();
     }
 

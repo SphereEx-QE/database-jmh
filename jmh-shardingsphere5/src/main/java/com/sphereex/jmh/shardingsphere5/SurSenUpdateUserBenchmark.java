@@ -9,9 +9,12 @@ import java.sql.Connection;
 public class SurSenUpdateUserBenchmark extends SurSenUpdateUser {
     
     private static final DataSource DATA_SOURCE;
+    
+    private static final String tableSize;
 
     static {
         DATA_SOURCE = ShardingSpheres.createDataSource();
+        tableSize = ShardingSpheres.getTableSize();
     }
 
     @SneakyThrows
@@ -22,6 +25,6 @@ public class SurSenUpdateUserBenchmark extends SurSenUpdateUser {
 
     @Override
     public String getTableSize() {
-        return ShardingSpheres.getTableSize();
+        return tableSize;
     }
 }

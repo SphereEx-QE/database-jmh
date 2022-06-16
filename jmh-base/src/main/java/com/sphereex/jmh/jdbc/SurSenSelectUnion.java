@@ -23,7 +23,8 @@ public abstract class SurSenSelectUnion implements JDBCConnectionProvider, SurSe
     }
 
     @Benchmark
-    public void batchInserts() throws Exception {
+    @BenchmarkMode(Mode.AverageTime)
+    public void selectUnion() throws Exception {
         selectStatement.setString(1, "111111111111111111");
         selectStatement.setString(2, "19999999999");
         selectStatement.execute();

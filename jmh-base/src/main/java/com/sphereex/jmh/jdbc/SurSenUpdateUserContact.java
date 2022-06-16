@@ -21,7 +21,8 @@ public abstract class SurSenUpdateUserContact implements JDBCConnectionProvider,
     }
 
     @Benchmark
-    public void batchInserts() throws Exception {
+    @BenchmarkMode(Mode.AverageTime)
+    public void updateAreaCode() throws Exception {
         updateStatement.execute();
     }
 

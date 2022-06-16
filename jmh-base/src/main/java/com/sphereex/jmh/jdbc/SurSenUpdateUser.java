@@ -22,7 +22,8 @@ public abstract class SurSenUpdateUser implements JDBCConnectionProvider, SurSen
     }
 
     @Benchmark
-    public void batchInserts() throws Exception {
+    @BenchmarkMode(Mode.AverageTime)
+    public void updateName() throws Exception {
         updateStatement.setString(1, "TEST_USER_10");
         updateStatement.execute();
     }
