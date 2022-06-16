@@ -18,15 +18,15 @@ public abstract class SurSenSelectUnion implements JDBCConnectionProvider, SurSe
         selectStatement =
                 getConnection().prepareStatement(("select a.name from tb_f_user$TABLE_SIZE a, tb_f_user_cert$TABLE_SIZE b, " +
                         "tb_f_user_contact$TABLE_SIZE c where a.id = b.user_id and a.id = c.user_id and b.cert_no = ? and a" +
-                        ".name = ? and c.phone = ?;").replaceAll("$TABLE_SIZE",
-                        getTableSize()));
+                        ".name = ? and c.phone = ?;").replace("$TABLE_SIZE", getTableSize()));
     }
 
     @Benchmark
     @BenchmarkMode(Mode.AverageTime)
     public void selectUnion() throws Exception {
-        selectStatement.setString(1, "111111111111111111");
-        selectStatement.setString(2, "19999999999");
+        selectStatement.setString(1,"111111111111111111");
+        selectStatement.setString(2, "TEST_UNION");
+        selectStatement.setString(3, "19999999999");
         selectStatement.execute();
     }
 
