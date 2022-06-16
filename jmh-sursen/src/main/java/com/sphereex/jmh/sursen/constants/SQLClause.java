@@ -15,6 +15,7 @@ public interface SQLClause {
             "  `updator` varchar(64) DEFAULT NULL COMMENT '更新人',\n" +
             "  `disable` tinyint(1) NOT NULL DEFAULT '0' COMMENT '逻辑删除标识',\n" +
             "  PRIMARY KEY (`id`),\n" +
+            "  KEY `tb_f_user_name_index` (`name`),\n" +
             "  KEY `tb_f_user_nationality_index` (`nationality`),\n" +
             "  KEY `tb_f_user_create_time_index` (`create_time`) USING BTREE,\n" +
             "  KEY `tb_f_user_update_time_index` (`update_time`) USING BTREE\n" +
