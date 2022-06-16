@@ -1,5 +1,7 @@
 package com.sphereex.jmh.shardingsphere5;
 
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.SneakyThrows;
@@ -7,6 +9,8 @@ import org.apache.shardingsphere.driver.api.yaml.YamlShardingSphereDataSourceFac
 
 import javax.sql.DataSource;
 import java.io.File;
+import java.io.FileReader;
+import java.util.Properties;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class ShardingSpheres {
@@ -14,6 +18,16 @@ public final class ShardingSpheres {
     @SneakyThrows
     public static DataSource createDataSource() {
         String configurationFile = System.getProperty("shardingsphere.configurationFile");
+        String datasourceType = System.getProperty("datasourceType");
+        if ("mysql".equals(datasourceType)) {
+            Properties dataSourceProperties = new Properties();
+            dataSourceProperties.load(new FileReader(configurationFile));
+            HikariConfig hikariConfig = new HikariConfig();
+            hikariConfig.setJdbcUrl(dataSourceProperties.getProperty("jdbcUrl"));
+            hikariConfig.setUsername(dataSourceProperties.getProperty("username"));
+            hikariConfig.setPassword(dataSourceProperties.getProperty("password"));
+            return new HikariDataSource(hikariConfig);
+        }
         return YamlShardingSphereDataSourceFactory.createDataSource(new File(configurationFile));
     }
     
