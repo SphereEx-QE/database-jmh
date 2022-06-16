@@ -16,7 +16,7 @@ public class UserContact implements DataCommandReceiver {
         Connection connection = dataSource.getConnection();
         PreparedStatement preparedStatement = null;
         String tableName = "";
-        String INSERT_CLAUSE = "insert into TABLE_NAME values (?,?,?,?,?,?,?,?,?,?,?)";
+        String INSERT_CLAUSE = "insert into TABLE_NAME values (?,?,?,?,?,?,?,?,?,?,?,?)";
         tableName = TableNameUtil.getTableNameThroughSize("tb_f_user_contact", tableSize);
         preparedStatement = connection.prepareStatement(INSERT_CLAUSE.replace("TABLE_NAME", tableName));
         for (int i = 0; i < tableSize; i++) {
@@ -35,19 +35,21 @@ public class UserContact implements DataCommandReceiver {
         preparedStatement.setString(3, "+86");
         // phone
         preparedStatement.setString(4, RandomDataUtil.getRandomMobileNumber());
+        // phone prefix
+        preparedStatement.setString(5, "");
         // email
-        preparedStatement.setString(5, RandomDataUtil.getRandomEmailAddress());
+        preparedStatement.setString(6, RandomDataUtil.getRandomEmailAddress());
         // master
-        preparedStatement.setInt(6, 1);
+        preparedStatement.setInt(7, 1);
         // create_time
-        preparedStatement.setTimestamp(7, now);
-        // update_time
         preparedStatement.setTimestamp(8, now);
+        // update_time
+        preparedStatement.setTimestamp(9, now);
         // version
-        preparedStatement.setInt(9, 1);
+        preparedStatement.setInt(10, 1);
         // updator
-        preparedStatement.setString(10, RandomDataUtil.getRandomUserName());
+        preparedStatement.setString(11, RandomDataUtil.getRandomUserName());
         // disable
-        preparedStatement.setInt(11, 0);
+        preparedStatement.setInt(12, 0);
     }
 }

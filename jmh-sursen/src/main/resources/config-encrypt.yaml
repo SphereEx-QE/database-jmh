@@ -63,6 +63,10 @@ rules:
             cipherColumn: phone_cipher
             cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
             encryptorName: sm4_encryptor
+          phone_prefix:
+            cipherColumn: phone_prefix_cipher
+            cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
+            encryptorName: sm4_encryptor
           email:
             cipherColumn: email_cipher
             cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
