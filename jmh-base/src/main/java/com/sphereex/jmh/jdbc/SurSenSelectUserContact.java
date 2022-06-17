@@ -15,9 +15,8 @@ public abstract class SurSenSelectUserContact implements JDBCConnectionProvider,
 
     @Setup(Level.Trial)
     public void setup() throws Exception {
-        selectStatement =
-                getConnection().prepareStatement(("select * from tb_f_user_contact$TABLE_SIZE where phone like '156%' order by phone " +
-                        "limit 10;").replace("$TABLE_SIZE", getTableSize()));
+        String sql = ("select * from tb_f_user_contact$TABLE_SIZE where phone like '156%' order by phone limit 10;").replace("$TABLE_SIZE", getTableSize());
+        selectStatement = getConnection().prepareStatement(sql);
     }
 
     @Benchmark
