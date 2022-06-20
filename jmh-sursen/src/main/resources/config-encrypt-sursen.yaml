@@ -1,0 +1,160 @@
+schemaName: sursen_encrypt
+dataSources:
+  unique_ds:
+    dataSourceClassName: com.zaxxer.hikari.HikariDataSource
+    driverClassName: com.mysql.jdbc.Driver
+    jdbcUrl: jdbc:mysql://127.0.0.1:3306/sursen_encrypt?serverTimezone=UTC&useSSL=false&useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: root
+    connectionTimeoutMilliseconds: 30000
+    idleTimeoutMilliseconds: 60000
+    maxLifetimeMilliseconds: 1800000
+    maxPoolSize: 50
+    minPoolSize: 1
+
+rules:
+  - !ENCRYPT
+    encryptors:
+      sursen_encryptor:
+        type: SURSEN
+    tables:
+      tb_f_user10:
+        columns:
+          birthday:
+            dataType: DATE
+            cipherColumn: birthday_cipher
+            cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
+            encryptorName: sursen_encryptor
+          name:
+            cipherColumn: name_cipher
+            cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
+            encryptorName: sursen_encryptor
+          contact_person:
+            cipherColumn: contact_person_cipher
+            cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
+            encryptorName: sursen_encryptor
+      tb_f_user_cert10:
+        columns:
+          cert_no:
+            cipherColumn: cert_no_cipher
+            cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
+            encryptorName: sursen_encryptor
+          effective_date:
+            dataType: DATE
+            cipherColumn: effective_date_cipher
+            cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
+            encryptorName: sursen_encryptor
+          expire_date:
+            dataType: DATE
+            cipherColumn: expire_date_cipher
+            cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
+            encryptorName: sursen_encryptor
+      tb_f_user_contact10:
+        columns:
+          phone:
+            cipherColumn: phone_cipher
+            cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
+            encryptorName: sursen_encryptor
+          phone_prefix:
+            cipherColumn: phone_prefix_cipher
+            cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
+            encryptorName: sursen_encryptor
+          email:
+            cipherColumn: email_cipher
+            cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
+            encryptorName: sursen_encryptor
+
+      tb_f_user100:
+        columns:
+          birthday:
+            dataType: DATE
+            cipherColumn: birthday_cipher
+            cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
+            encryptorName: sursen_encryptor
+          name:
+            cipherColumn: name_cipher
+            cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
+            encryptorName: sursen_encryptor
+          contact_person:
+            cipherColumn: contact_person_cipher
+            cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
+            encryptorName: sursen_encryptor
+      tb_f_user_cert100:
+        columns:
+          cert_no:
+            cipherColumn: cert_no_cipher
+            cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
+            encryptorName: sursen_encryptor
+          effective_date:
+            dataType: DATE
+            cipherColumn: effective_date_cipher
+            cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
+            encryptorName: sursen_encryptor
+          expire_date:
+            dataType: DATE
+            cipherColumn: expire_date_cipher
+            cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
+            encryptorName: sursen_encryptor
+      tb_f_user_contact100:
+        columns:
+          phone:
+            cipherColumn: phone_cipher
+            cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
+            encryptorName: sursen_encryptor
+          phone_prefix:
+            cipherColumn: phone_prefix_cipher
+            cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
+            encryptorName: sursen_encryptor
+          email:
+            cipherColumn: email_cipher
+            cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
+            encryptorName: sursen_encryptor
+
+      tb_f_user1000:
+        columns:
+          birthday:
+            dataType: DATE
+            cipherColumn: birthday_cipher
+            cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
+            encryptorName: sursen_encryptor
+          name:
+            cipherColumn: name_cipher
+            cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
+            encryptorName: sursen_encryptor
+          contact_person:
+            cipherColumn: contact_person_cipher
+            cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
+            encryptorName: sursen_encryptor
+      tb_f_user_cert1000:
+        columns:
+          cert_no:
+            cipherColumn: cert_no_cipher
+            cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
+            encryptorName: sursen_encryptor
+          effective_date:
+            dataType: DATE
+            cipherColumn: effective_date_cipher
+            cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
+            encryptorName: sursen_encryptor
+          expire_date:
+            dataType: DATE
+            cipherColumn: expire_date_cipher
+            cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
+            encryptorName: sursen_encryptor
+      tb_f_user_contact1000:
+        columns:
+          phone:
+            cipherColumn: phone_cipher
+            cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
+            encryptorName: sursen_encryptor
+          phone_prefix:
+            cipherColumn: phone_prefix_cipher
+            cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
+            encryptorName: sursen_encryptor
+          email:
+            cipherColumn: email_cipher
+            cipherDataType: VARCHAR(80) NOT NULL DEFAULT ''
+            encryptorName: sursen_encryptor
+            
+props:
+  sql-show: true

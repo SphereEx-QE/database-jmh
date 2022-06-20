@@ -1,5 +1,6 @@
 package com.sphereex.jmh.sursen.util;
 
+import com.sphereex.encrypt.sdk.KeyStores;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import lombok.SneakyThrows;
@@ -23,6 +24,28 @@ public class DatasourceUtil {
             hikariConfig.setUsername(dataSourceProperties.getProperty("username"));
             hikariConfig.setPassword(dataSourceProperties.getProperty("password"));
             return new HikariDataSource(hikariConfig);
+        }
+        if ("sursen".equals(datasourceType)) {
+            String tableName = System.getProperty("tableName");
+            String realTableName = tableName.substring(0, tableName.lastIndexOf("1"));
+            if ("tb_f_user".equals(realTableName)) {
+                KeyStores.initTable(tableName, 100, "id", "name", "birthday", "gender", "nationality", "contact_person",
+                        "create_time", "update_time", "version", "updator", "disable");
+                KeyStores.authTable(tableName, 101, "id", "name", "birthday", "gender", "nationality", "contact_person",
+                        "create_time", "update_time", "version", "updator", "disable");
+            }
+            if ("tb_f_user_cert".equals(realTableName)) {
+                KeyStores.initTable(tableName, 102, "id", "name", "birthday", "gender", "nationality", "contact_person",
+                        "create_time", "update_time", "version", "updator", "disable");
+                KeyStores.authTable(tableName, 103, "id", "name", "birthday", "gender", "nationality", "contact_person",
+                        "create_time", "update_time", "version", "updator", "disable");
+            }
+            if ("tb_f_user_contact".equals(realTableName)) {
+                KeyStores.initTable(tableName, 104, "id", "name", "birthday", "gender", "nationality", "contact_person",
+                        "create_time", "update_time", "version", "updator", "disable");
+                KeyStores.authTable(tableName, 105, "id", "name", "birthday", "gender", "nationality", "contact_person",
+                        "create_time", "update_time", "version", "updator", "disable");
+            }
         }
         return YamlShardingSphereDataSourceFactory.createDataSource(new File(configurationFile));
     }

@@ -36,6 +36,28 @@
             <version>${shardingsphere.version}</version>
         </dependency>
         <dependency>
+            <groupId>com.sphereex</groupId>
+            <artifactId>sphereex-encrypt-for-sursen</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>system</scope>
+            <type>jar</type>
+            <optional>true</optional>
+            <systemPath>
+                /Users/nianjun/Work/Workspace/database-jmh/jmh-sursen/src/main/resources/sphereex-encrypt-for-sursen.jar
+            </systemPath>
+        </dependency>
+        <dependency>
+            <groupId>io.yottachain</groupId>
+            <artifactId>ytcrypto-java-binding</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>system</scope>
+            <type>jar</type>
+            <optional>true</optional>
+            <systemPath>
+                /Users/nianjun/Work/Workspace/database-jmh/jmh-sursen/src/main/resources/ytcrypto-java-binding-1.0.jar
+            </systemPath>
+        </dependency>
+        <dependency>
             <groupId>org.apache.shardingsphere</groupId>
             <artifactId>shardingsphere-encrypt-sm</artifactId>
             <version>${shardingsphere.version}</version>
@@ -48,6 +70,16 @@
         <dependency>
             <groupId>com.zaxxer</groupId>
             <artifactId>HikariCP</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>net.java.dev.jna</groupId>
+            <artifactId>jna</artifactId>
+            <version>5.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>net.java.dev.jna</groupId>
+            <artifactId>jna-platform</artifactId>
+            <version>5.2.0</version>
         </dependency>
     </dependencies>
 
