@@ -1,17 +1,14 @@
 package com.sphereex.jmh.sursen;
 
 import com.sphereex.encrypt.sdk.Error;
-import com.sphereex.encrypt.sdk.KeyStores;
 import com.sphereex.jmh.sursen.command.data.impl.CreateTableCommand;
 import com.sphereex.jmh.sursen.command.data.impl.DropTableCommand;
 import com.sphereex.jmh.sursen.command.data.impl.InsertTableCommand;
 import com.sphereex.jmh.sursen.constants.SursenParamConfig;
 import com.sphereex.jmh.sursen.util.DatasourceUtil;
-import org.apache.shardingsphere.driver.api.yaml.YamlShardingSphereDataSourceFactory;
 
 import javax.sql.DataSource;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -31,15 +28,12 @@ public class Application {
         System.setProperty("KeyApiPort", "8030");
         System.setProperty("KeyExpiredTime", "60");
 
-      
-        DataSource dataSource =
-                YamlShardingSphereDataSourceFactory.createDataSource(new File(System.getProperty("configFile")));
+
+        DataSource dataSource = DatasourceUtil.createDataSource(System.getProperty("configFile"));
         CreateTableCommand createTableCommand = new CreateTableCommand();
         DropTableCommand dropTableCommand = new DropTableCommand();
         InsertTableCommand insertTableCommand = new InsertTableCommand();
 
-        KeyStores.initTable("tb_f_user10", 100, "id","name","birthday","gender","nationality","contact_person","create_time","update_time","version","updator","disable");
-        KeyStores.authTable("tb_f_user10", 101, "id","name","birthday","gender","nationality","contact_person","create_time","update_time","version","updator","disable");
         dropTableCommand.execute(dataSource, "tb_f_user_cert10");
         createTableCommand.execute(dataSource, "tb_f_user_cert10");
         insertTableCommand.execute(dataSource, "tb_f_user_cert10");

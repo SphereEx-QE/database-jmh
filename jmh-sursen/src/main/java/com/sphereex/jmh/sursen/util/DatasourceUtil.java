@@ -35,15 +35,15 @@ public class DatasourceUtil {
                         "create_time", "update_time", "version", "updator", "disable");
             }
             if ("tb_f_user_cert".equals(realTableName)) {
-                KeyStores.initTable(tableName, 102, "id", "name", "birthday", "gender", "nationality", "contact_person",
-                        "create_time", "update_time", "version", "updator", "disable");
-                KeyStores.authTable(tableName, 103, "id", "name", "birthday", "gender", "nationality", "contact_person",
-                        "create_time", "update_time", "version", "updator", "disable");
+                KeyStores.initTable(tableName, 102, "id", "user_id", "cert_type", "cert_no", "cert_key", "issuing_unit",
+                        "effective_date", "expire_date", "master", "create_time", "update_time", "version", "updator", "disable");
+                KeyStores.authTable(tableName, 103, "id", "user_id", "cert_type", "cert_no", "cert_key", "issuing_unit",
+                        "effective_date", "expire_date", "master", "create_time", "update_time", "version", "updator", "disable");
             }
             if ("tb_f_user_contact".equals(realTableName)) {
-                KeyStores.initTable(tableName, 104, "id", "name", "birthday", "gender", "nationality", "contact_person",
+                KeyStores.initTable(tableName, 104, "id", "user_id", "area_code", "phone", "email", "master",
                         "create_time", "update_time", "version", "updator", "disable");
-                KeyStores.authTable(tableName, 105, "id", "name", "birthday", "gender", "nationality", "contact_person",
+                KeyStores.authTable(tableName, 105, "id", "user_id", "area_code", "phone", "email", "master",
                         "create_time", "update_time", "version", "updator", "disable");
             }
         }
