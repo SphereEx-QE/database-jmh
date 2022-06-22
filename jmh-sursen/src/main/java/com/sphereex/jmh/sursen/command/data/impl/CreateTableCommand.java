@@ -63,4 +63,8 @@ public class CreateTableCommand implements DataCommand, SpecificDataCommand {
         EmptyCommand emptyCommand = new EmptyCommand();
         emptyCommand.createTable(dataSource, SQLClause.USER_CREATION.replace("TABLE_NAME", tableName));
     }
+    
+    private void initTableForSursen() {
+        System.out.println("current database type is : " + System.getProperty(""));
+    }
 }

@@ -3,14 +3,11 @@ package com.sphereex.jmh.jdbc;
 import org.openjdk.jmh.annotations.*;
 
 import java.sql.PreparedStatement;
-import java.util.concurrent.ThreadLocalRandom;
 
 @BenchmarkMode(Mode.SingleShotTime)
 @State(Scope.Thread)
 public abstract class SurSenSelectUserCert implements JDBCConnectionProvider, SurSenTableProvider {
-
-    private final ThreadLocalRandom random = ThreadLocalRandom.current();
-
+    
     private PreparedStatement selectStatement;
 
     @Setup(Level.Trial)

@@ -16,27 +16,12 @@ import java.sql.SQLException;
 public class Application {
 
     public static void main(String... args) throws SQLException, IOException, Error.LoadKeyFailException, Error.InitFailException, Error.AuthFailException {
-//        String command = System.getProperty("command");
-//        if ("prepare".equals(command)) {
-//            executePrepareCommand();
-//        } else {
-//            executeDataCommand();
-//        }
-
-        System.setProperty("KeyStoreService", "http://150.138.84.46:10083/api/encryption/key/v1/");
-        System.setProperty("ZookeepConnect", "150.138.84.30:2182");
-        System.setProperty("KeyApiPort", "8030");
-        System.setProperty("KeyExpiredTime", "60");
-
-
-        DataSource dataSource = DatasourceUtil.createDataSource(System.getProperty("configFile"));
-        CreateTableCommand createTableCommand = new CreateTableCommand();
-        DropTableCommand dropTableCommand = new DropTableCommand();
-        InsertTableCommand insertTableCommand = new InsertTableCommand();
-
-        dropTableCommand.execute(dataSource, "tb_f_user_cert10");
-        createTableCommand.execute(dataSource, "tb_f_user_cert10");
-        insertTableCommand.execute(dataSource, "tb_f_user_cert10");
+        String command = System.getProperty("command");
+        if ("prepare".equals(command)) {
+            executePrepareCommand();
+        } else {
+            executeDataCommand();
+        }
     }
 
     private static void executeDataCommand() throws SQLException {

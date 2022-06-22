@@ -34,4 +34,8 @@ public final class ShardingSpheres {
     public static String getTableSize() {
         return System.getProperty("tableSize");
     }
+    
+    public static String getKeyId() {
+        return System.getProperty("tableSize");
+    }
 }

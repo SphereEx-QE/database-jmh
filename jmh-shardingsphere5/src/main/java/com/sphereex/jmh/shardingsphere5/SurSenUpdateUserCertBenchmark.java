@@ -24,4 +24,9 @@ public class SurSenUpdateUserCertBenchmark extends SurSenUpdateUserCert {
     public String getTableSize() {
         return ShardingSpheres.getTableSize();
     }
+
+    @Override
+    public String getKeyId() {
+        return ShardingSpheres.getKeyId();
+    }
 }

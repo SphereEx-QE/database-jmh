@@ -10,4 +10,29 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>jmh-base</artifactId>
     <name>JMH benchmark: Base</name>
+    
+<!--    <dependencies>-->
+<!--        <dependency>-->
+<!--            <groupId>com.sphereex</groupId>-->
+<!--            <artifactId>sphereex-encrypt-for-sursen</artifactId>-->
+<!--            <version>1.0-SNAPSHOT</version>-->
+<!--            <scope>system</scope>-->
+<!--            <type>jar</type>-->
+<!--            <optional>true</optional>-->
+<!--            <systemPath>-->
+<!--                /Users/nianjun/Work/Workspace/database-jmh/jmh-sursen/src/main/resources/sphereex-encrypt-for-sursen.jar-->
+<!--            </systemPath>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>io.yottachain</groupId>-->
+<!--            <artifactId>ytcrypto-java-binding</artifactId>-->
+<!--            <version>1.0-SNAPSHOT</version>-->
+<!--            <scope>system</scope>-->
+<!--            <type>jar</type>-->
+<!--            <optional>true</optional>-->
+<!--            <systemPath>-->
+<!--                /Users/nianjun/Work/Workspace/database-jmh/jmh-sursen/src/main/resources/ytcrypto-java-binding-1.0.jar-->
+<!--            </systemPath>-->
+<!--        </dependency>-->
+<!--    </dependencies>-->
 </project>

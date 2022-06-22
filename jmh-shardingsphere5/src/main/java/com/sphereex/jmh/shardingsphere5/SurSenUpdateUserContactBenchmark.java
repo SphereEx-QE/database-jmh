@@ -7,7 +7,7 @@ import javax.sql.DataSource;
 import java.sql.Connection;
 
 public class SurSenUpdateUserContactBenchmark extends SurSenUpdateUserContact {
-    
+
     private static final DataSource DATA_SOURCE;
 
     static {
@@ -23,5 +23,10 @@ public class SurSenUpdateUserContactBenchmark extends SurSenUpdateUserContact {
     @Override
     public String getTableSize() {
         return ShardingSpheres.getTableSize();
+    }
+
+    @Override
+    public String getKeyId() {
+        return ShardingSpheres.getKeyId();
     }
 }
