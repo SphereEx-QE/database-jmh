@@ -14,7 +14,7 @@ import java.util.Properties;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class ShardingSpheres {
-    
+
     @SneakyThrows
     public static DataSource createDataSource() {
         String configurationFile = System.getProperty("shardingsphere.configurationFile");
@@ -31,15 +31,18 @@ public final class ShardingSpheres {
             hikariConfig.setIdleTimeout(60000);
             hikariConfig.setMaxLifetime(1800000);
             hikariConfig.setConnectionTimeout(30000);
+            hikariConfig.addDataSourceProperty("cachePrepStmts", "true");
+            hikariConfig.addDataSourceProperty("prepStmtCacheSize", "8192");
+            hikariConfig.addDataSourceProperty("prepStmtCacheSqlLimit", "1024");
             return new HikariDataSource(hikariConfig);
         }
         return YamlShardingSphereDataSourceFactory.createDataSource(new File(configurationFile));
     }
-    
+
     public static String getTableSize() {
         return System.getProperty("tableSize");
     }
-    
+
     public static String getKeyId() {
         return System.getProperty("tableSize");
     }
