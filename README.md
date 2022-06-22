@@ -29,21 +29,19 @@ java -classpath 'dependency/*:jmh-sursen-1.0-SNAPSHOT.jar' -DconfigFile=/opt/sur
 换成其他测试用的表名，也会删除、创建对应的表，灌入对应数据量的数据。
 > 这里的表名皆为 PoC 文档中指定的表名
 
-
 ## 测试数据
 进入目录 /opt/sursen/sursen-test
 此命令会根据 `config-encrypt.yaml` 以及传入的参数进行压测
 ```shell
-java -classpath 'dependency/*:jmh-shardingsphere5-1.0-SNAPSHOT.jar'  -Dshardingsphere.configurationFile=/opt/sursen/config/config-encrypt.yaml -DtableSize=10 org.openjdk.jmh.Main "com.sphereex.jmh.shardingsphere5.SurSenSelectUserBenchmark" -f 2 -i 1 -r 30 -t 10  -wi 1 -w 5
+java -classpath 'dependency/*:jmh-shardingsphere5-1.0-SNAPSHOT.jar'  -Dshardingsphere.configurationFile=/opt/sursen/config/config-encrypt.yaml -DtableSize=10 org.openjdk.jmh.Main "com.sphereex.jmh.shardingsphere5.SurSenSelectUserBenchmark" -f 1 -i 5 -r 30 -t 100  -wi 1 -w 5
 
 # 如果想不用加密算法对 MySQL 压测
 # 将 datasource.properties 拷贝到 /opt/sursen/config/
-java -classpath 'dependency/*:jmh-shardingsphere5-1.0-SNAPSHOT.jar'  -Dshardingsphere.configurationFile=/opt/sursen/config/datasource.properties -DdatasourceType=mysql -DtableSize=10 org.openjdk.jmh.Main "com.sphereex.jmh.shardingsphere5.SurSenSelectUserBenchmark" -f 2 -i 1 -r 30 -t 10  -wi 1 -w 5
+java -classpath 'dependency/*:jmh-shardingsphere5-1.0-SNAPSHOT.jar'  -Dshardingsphere.configurationFile=/opt/sursen/config/datasource.properties -DdatasourceType=mysql -DtableSize=10 org.openjdk.jmh.Main "com.sphereex.jmh.shardingsphere5.SurSenSelectUserBenchmark" -f 1 -i 5 -r 30 -t 100  -wi 1 -w 5
 ```
 ```shell
 # 可以通过 -h 的命令来查看 JMH 的测试参数，例如 -w 为 warmup 的时间
 java -classpath 'dependency/*:jmh-shardingsphere5-1.0-SNAPSHOT.jar'  org.openjdk.jmh.Main -h
-
 
 ## SurSenSelectUnionBenchmark 对应如下 SQL
 select a.name,  from tb_f_user10 a, tb_f_user_cert10 b, tb_f_user_contact10 c where a.id = b.user_id and a.id = c.user_id and b.cert_no = ? and a.name = ? and c.phone = ?;

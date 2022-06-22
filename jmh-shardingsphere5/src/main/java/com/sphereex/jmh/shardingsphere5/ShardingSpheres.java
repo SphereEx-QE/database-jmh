@@ -26,6 +26,11 @@ public final class ShardingSpheres {
             hikariConfig.setJdbcUrl(dataSourceProperties.getProperty("jdbcUrl"));
             hikariConfig.setUsername(dataSourceProperties.getProperty("username"));
             hikariConfig.setPassword(dataSourceProperties.getProperty("password"));
+            hikariConfig.setMaximumPoolSize(512);
+            hikariConfig.setMinimumIdle(1);
+            hikariConfig.setIdleTimeout(60000);
+            hikariConfig.setMaxLifetime(1800000);
+            hikariConfig.setConnectionTimeout(30000);
             return new HikariDataSource(hikariConfig);
         }
         return YamlShardingSphereDataSourceFactory.createDataSource(new File(configurationFile));
