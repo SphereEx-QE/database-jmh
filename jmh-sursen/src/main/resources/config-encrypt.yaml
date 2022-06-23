@@ -3,7 +3,7 @@ dataSources:
   unique_ds:
     dataSourceClassName: com.zaxxer.hikari.HikariDataSource
     driverClassName: com.mysql.jdbc.Driver
-    jdbcUrl: jdbc:mysql://127.0.0.1:3306/sursen_encryptuseSSL=false&useServerPrepStmts=true&cachePrepStmts=true&prepStmtCacheSize=8192&prepStmtCacheSqlLimit=1024
+    jdbcUrl: jdbc:mysql://127.0.0.1:3306/sursen_encrypt?useSSL=false&useServerPrepStmts=true&cachePrepStmts=true&prepStmtCacheSize=8192&prepStmtCacheSqlLimit=1024
     username: root
     password: root
     connectionTimeoutMilliseconds: 30000
