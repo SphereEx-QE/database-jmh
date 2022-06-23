@@ -13,7 +13,7 @@
 进入目录 /opt/sursen/sursen-data
 执行如下命令灌入测试数据：
 ```shell
-此命令会灌入一些随机的测试数据
+## 此命令会灌入一些随机的测试数据
 java -classpath 'dependency/*:jmh-sursen-1.0-SNAPSHOT.jar' -DconfigFile=/opt/sursen/config/config-encrypt.yaml -DtableName=tb_f_user10 -Dcommand=init com.sphereex.jmh.sursen.Application
 ## 此命令会准备一些用于压测的特殊的测试数据,前提是确保三张表的数据都已经灌好
 java -classpath 'dependency/*:jmh-sursen-1.0-SNAPSHOT.jar' -DconfigFile=/opt/sursen/config/config-encrypt.yaml -DprepareSQL=/opt/sursen/config/prepare.sql -Dcommand=prepare com.sphereex.jmh.sursen.Application
