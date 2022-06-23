@@ -5,11 +5,11 @@
 ```shell
 ./mvnw clean package
 ```
-将 `jmh-shardingsphere5` 下的 target 复制到某个目录并改名（例如 /opt/sursen/sursen-test），此模块用于压测。
+将 `jmh-shardingsphere5` 下的 target 复制到某个目录并改名（例如 `/opt/sursen/sursen-test`），此模块用于压测。
 
-将 `jmh-sursen` 下的 target 复制到某个目录并改名（例如 /opt/sursen/sursen-data），此模块用于数据的构造以及初始化。
+将 `jmh-sursen` 下的 target 复制到某个目录并改名（例如 `/opt/sursen/sursen-data`），此模块用于数据的构造以及初始化。
 
-将 `jmh-sursen` 下的 `src/main/resources/` 下的 `config-encrypt.yaml`、`prepare.sql` 复制到某个目录，例如 /opt/sursen/config/ 作为配置文件，后面造数跟压测都会用得到
+将 `jmh-sursen` 下的 `src/main/resources/` 下的 `config-encrypt.yaml`、`prepare.sql` 复制到某个目录，例如 `/opt/sursen/config/`， 作为配置文件，后面造数跟压测都会用得到
 
 ## 插入数据
 进入目录 /opt/sursen/sursen-data
