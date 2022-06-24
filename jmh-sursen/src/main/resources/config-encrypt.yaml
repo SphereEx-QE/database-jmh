@@ -165,4 +165,4 @@ rules:
             encryptorName: aes_encryptor
             
 props:
-  sql-show: false
+  sql-show: true

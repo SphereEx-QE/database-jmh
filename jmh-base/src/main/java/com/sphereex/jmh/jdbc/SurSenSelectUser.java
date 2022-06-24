@@ -18,7 +18,7 @@ public abstract class SurSenSelectUser implements JDBCConnectionProvider, SurSen
     }
 
     @Benchmark
-    @BenchmarkMode(Mode.All)
+    @BenchmarkMode(Mode.AverageTime)
     public void selectUser() throws Exception {
         selectStatement.setString(1, "TEST_USER_10");
         selectStatement.execute();
