@@ -34,9 +34,10 @@ public class UserContact implements DataCommandReceiver {
         // area_code
         preparedStatement.setString(3, "+86");
         // phone
+        String mobile = RandomDataUtil.getRandomMobileNumber();
         preparedStatement.setString(4, RandomDataUtil.getRandomMobileNumber());
         // phone prefix
-        preparedStatement.setString(5, "");
+        preparedStatement.setString(5, mobile.substring(0, 3));
         // email
         preparedStatement.setString(6, RandomDataUtil.getRandomEmailAddress());
         // master
