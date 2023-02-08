@@ -72,34 +72,25 @@ public class ShardingSphereOnePhaseXATransactionBenchmark implements JDBCConnect
     @Benchmark
     public void oltpReadWrite() throws Exception {
         try {
-            long t1 = System.currentTimeMillis();
             int randomIdNum = random.nextInt(BenchmarkParameters.TABLES);
             for (PreparedStatement each : reads) {
                 each.setInt(1, randomIdNum);
                 each.execute();
             }
-            long t2 = System.currentTimeMillis();
-            System.out.println("read: " + (t2 - t1));
             
             PreparedStatement indexUpdate = indexUpdates[random.nextInt(BenchmarkParameters.TABLES)];
             indexUpdate.setInt(1, randomIdNum);
             indexUpdate.execute();
-            long t3 = System.currentTimeMillis();
-            System.out.println("indexUpdate: " + (t3 - t2));
             
             PreparedStatement nonIndexUpdate = nonIndexUpdates[random.nextInt(BenchmarkParameters.TABLES)];
             nonIndexUpdate.setString(1, randomString(120));
             nonIndexUpdate.setInt(2, randomIdNum);
             nonIndexUpdate.execute();
-            long t4 = System.currentTimeMillis();
-            System.out.println("nonIndexUpdate: " + (t4 - t3));
             
             int table = random.nextInt(BenchmarkParameters.TABLES);
             PreparedStatement delete = deletes[table];
             delete.setInt(1, randomIdNum);
             delete.execute();
-            long t5 = System.currentTimeMillis();
-            System.out.println("delete: " + (t5 - t4));
             
             PreparedStatement insert = inserts[table];
             insert.setInt(1, randomIdNum);
@@ -107,12 +98,8 @@ public class ShardingSphereOnePhaseXATransactionBenchmark implements JDBCConnect
             insert.setString(3, randomString(120));
             insert.setString(4, randomString(60));
             insert.execute();
-            long t6 = System.currentTimeMillis();
-            System.out.println("insert: " + (t6 - t5));
             
             connection.commit();
-            long t7 = System.currentTimeMillis();
-            System.out.println("commit: " + (t7 - t6));
         } catch (Exception e) {
             e.printStackTrace();
         }
