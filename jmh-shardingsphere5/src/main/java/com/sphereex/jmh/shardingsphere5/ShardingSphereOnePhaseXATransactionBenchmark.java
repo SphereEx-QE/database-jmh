@@ -17,7 +17,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 
 /**
- * One phase xa transaction benchmark, only support one sharding table `sbtest_1`.
+ * One phase xa transaction benchmark, only support one sharding table `sbtest1`.
  */
 @State(Scope.Thread)
 public class ShardingSphereOnePhaseXATransactionBenchmark implements JDBCConnectionProvider {
