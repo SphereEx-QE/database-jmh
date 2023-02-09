@@ -2,6 +2,7 @@ package com.sphereex.jmh.shardingsphere5;
 
 import com.sphereex.jmh.config.BenchmarkParameters;
 import com.sphereex.jmh.jdbc.JDBCConnectionProvider;
+import com.sphereex.jmh.util.Strings;
 import lombok.SneakyThrows;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;
@@ -20,10 +21,10 @@ import java.util.concurrent.ThreadLocalRandom;
 
 
 /**
- * One phase xa transaction benchmark, only support one sharding table `sbtest1`.
+ * Two phase xa transaction benchmark.
  */
 @State(Scope.Thread)
-public class ShardingSphereOnePhaseXATransactionBenchmark implements JDBCConnectionProvider {
+public class ShardingSphereTwoPhaseXATransactionBenchmark implements JDBCConnectionProvider {
     
     private final ThreadLocalRandom random = ThreadLocalRandom.current();
     
@@ -49,23 +50,28 @@ public class ShardingSphereOnePhaseXATransactionBenchmark implements JDBCConnect
         try {
             connection = DATA_SOURCE.getConnection();
             connection.setAutoCommit(false);
-            int randomIdNum = random.nextInt(BenchmarkParameters.TABLE_SIZE - 20);
+            
             for (int i = 0; i < 10; i++) {
                 try (Statement each = connection.createStatement()) {
-                    each.execute(String.format("select c from sbtest1 where id=%s", randomIdNum));
+                    each.execute(String.format("select c from sbtest1 where id=%s", random.nextInt(BenchmarkParameters.TABLE_SIZE)));
                 }
             }
             
             try (Statement each = connection.createStatement()) {
-                each.execute(String.format("update sbtest1 set k=k+1 where id=%s", randomIdNum + 4));
+                each.execute(String.format("update sbtest1 set k=k+1 where id=%s", random.nextInt(BenchmarkParameters.TABLE_SIZE)));
             }
             
             try (Statement each = connection.createStatement()) {
-                each.execute(String.format("update sbtest1 set c='%s' where id=%s", randomString(120), randomIdNum + 4 * 2));
+                each.execute(String.format("update sbtest1 set c='%s' where id=%s", randomString(120), random.nextInt(BenchmarkParameters.TABLE_SIZE)));
+            }
+            
+            int id = random.nextInt(BenchmarkParameters.TABLE_SIZE);
+            try (Statement each = connection.createStatement()) {
+                each.execute(String.format("delete from sbtest1 where id=%s", id));
             }
             
             try (Statement each = connection.createStatement()) {
-                each.execute(String.format("delete from sbtest1 where id=%s", randomIdNum + 4 * 3));
+                each.execute(String.format("insert into sbtest1 (id,k,c,pad) values (%s,%s,'%s','%s')", id, random.nextInt(Integer.MAX_VALUE), Strings.randomString(120), Strings.randomString(60)));
             }
             connection.commit();
         } catch (Exception e) {
@@ -94,11 +100,10 @@ public class ShardingSphereOnePhaseXATransactionBenchmark implements JDBCConnect
         
     }
     
-    
     public static void main(String[] args) throws RunnerException {
         new Runner(new OptionsBuilder()
                 .include(ShardingSphereOnePhaseXATransactionBenchmark.class.getName())
-                .threads(50)
+                .threads(20)
                 .forks(1)
                 .build()).run();
     }
