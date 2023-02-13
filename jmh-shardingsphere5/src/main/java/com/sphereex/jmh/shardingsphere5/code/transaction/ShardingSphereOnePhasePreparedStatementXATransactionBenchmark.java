@@ -1,9 +1,9 @@
 package com.sphereex.jmh.shardingsphere5.code.transaction;
 
 import com.sphereex.jmh.config.BenchmarkParameters;
-import com.sphereex.jmh.jdbc.JDBCConnectionProvider;
 import com.sphereex.jmh.shardingsphere5.ShardingSpheres;
 import com.sphereex.jmh.util.Strings;
+import lombok.extern.slf4j.Slf4j;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Scope;
@@ -17,15 +17,18 @@ import org.openjdk.jmh.runner.options.OptionsBuilder;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.atomic.AtomicInteger;
 
 
 /**
  * One phase xa transaction benchmark, only support one sharding table `sbtest1`.
  */
+@Slf4j
 @State(Scope.Thread)
-public class ShardingSphereOnePhasePreparedStatementXATransactionBenchmark implements JDBCConnectionProvider {
+public class ShardingSphereOnePhasePreparedStatementXATransactionBenchmark {
     
     private final ThreadLocalRandom random = ThreadLocalRandom.current();
     
@@ -47,6 +50,12 @@ public class ShardingSphereOnePhasePreparedStatementXATransactionBenchmark imple
     
     private Connection connection;
     
+    private static final AtomicInteger THREAD_COUNT = new AtomicInteger(0);
+    
+    private final AtomicInteger loopCount = new AtomicInteger(0);
+    
+    private final Integer currentThreadNum = THREAD_COUNT.incrementAndGet(); 
+    
     @Setup(Level.Trial)
     public void setup() throws Exception {
         connection = getConnection();
@@ -66,44 +75,57 @@ public class ShardingSphereOnePhasePreparedStatementXATransactionBenchmark imple
         for (int i = 0; i < inserts.length; i++) {
             inserts[i] = connection.prepareStatement(String.format("insert into sbtest%d (id,k,c,pad) values (?,?,?,?)", i + 1));
         }
+        connection.commit();
     }
     
     @Benchmark
     public void oltpReadWrite() throws Exception {
         try {
             connection.setAutoCommit(false);
-            int randomIdNum = random.nextInt(BenchmarkParameters.TABLE_SIZE - 20);
+            
+            boolean hasRecord = false;
+            int localLoopCount = loopCount.incrementAndGet();
+            int randomIdNum = currentThreadNum * 50000 + localLoopCount;
+            log.info(Thread.currentThread().getName() + "Test begin, currentThreadNum: " +  currentThreadNum + ", randomId: " + randomIdNum);
+            if (randomIdNum > Integer.MAX_VALUE / 2 || randomIdNum <=0) {
+                loopCount.set(0);
+            }
+            if (localLoopCount > 40000 || localLoopCount <= 0) {
+                loopCount.set(0);
+            }
+            
             for (PreparedStatement each : reads) {
                 each.setInt(1, randomIdNum);
+                ResultSet rs = each.executeQuery();
+                if (rs.next()) {
+                    hasRecord = true;
+                }
             }
             
-            PreparedStatement indexUpdate = indexUpdates[random.nextInt(BenchmarkParameters.TABLES)];
-            indexUpdate.setInt(1, randomIdNum + 4);
-            indexUpdate.execute();
-            
-            PreparedStatement nonIndexUpdate = nonIndexUpdates[random.nextInt(BenchmarkParameters.TABLES)];
-            nonIndexUpdate.setString(1, Strings.randomString(120));
-            nonIndexUpdate.setInt(2, randomIdNum + 4 * 2);
-            nonIndexUpdate.execute();
-            
-            int table = random.nextInt(BenchmarkParameters.TABLES);
-            int deleteAndInsertId = randomIdNum + 4 * 3;
-            PreparedStatement delete = deletes[table];
-            delete.setInt(1, deleteAndInsertId);
-            delete.execute();
-            
-            PreparedStatement insert = inserts[table];
-            insert.setInt(1, deleteAndInsertId);
-            insert.setInt(2, deleteAndInsertId);
-            insert.setString(3, Strings.randomString(120));
-            insert.setString(4, Strings.randomString(60));
-            insert.execute();
-            
+            if (hasRecord) {
+                PreparedStatement indexUpdate = indexUpdates[random.nextInt(BenchmarkParameters.TABLES)];
+                indexUpdate.setInt(1, randomIdNum);
+                indexUpdate.execute();
+    
+                PreparedStatement nonIndexUpdate = nonIndexUpdates[random.nextInt(BenchmarkParameters.TABLES)];
+                nonIndexUpdate.setString(1, Strings.randomString(120));
+                nonIndexUpdate.setInt(2, randomIdNum);
+                nonIndexUpdate.execute();
+    
+                int table = random.nextInt(BenchmarkParameters.TABLES);
+                PreparedStatement delete = deletes[table];
+                delete.setInt(1, randomIdNum);
+                delete.execute();
+    
+                PreparedStatement insert = inserts[table];
+                insert.setInt(1, randomIdNum);
+                insert.setInt(2, randomIdNum);
+                insert.setString(3, Strings.randomString(120));
+                insert.setString(4, Strings.randomString(60));
+                insert.execute();
+            }
             connection.commit();
         } catch (Exception e) {
-            if (null != connection) {
-                connection.rollback();
-            }
             e.printStackTrace();
         }
     }
@@ -142,11 +164,11 @@ public class ShardingSphereOnePhasePreparedStatementXATransactionBenchmark imple
         new Runner(new OptionsBuilder()
                 .include(ShardingSphereOnePhasePreparedStatementXATransactionBenchmark.class.getName())
                 .threads(20)
-                .forks(1)
+                .forks(0)
                 .build()).run();
     }
     
-    @Override
+    //@Override
     public Connection getConnection() {
         try {
             return DATA_SOURCE.getConnection();

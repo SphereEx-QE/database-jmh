@@ -3,8 +3,8 @@ package com.sphereex.jmh.shardingsphere5.code.transaction;
 import com.sphereex.jmh.config.BenchmarkParameters;
 import com.sphereex.jmh.jdbc.JDBCConnectionProvider;
 import com.sphereex.jmh.shardingsphere5.ShardingSpheres;
-import com.sphereex.jmh.util.Strings;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Scope;
@@ -19,11 +19,13 @@ import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.atomic.AtomicInteger;
 
 
 /**
  * Two phase xa transaction benchmark.
  */
+@Slf4j
 @State(Scope.Thread)
 public class ShardingSphereTwoPhaseXATransactionBenchmark implements JDBCConnectionProvider {
     
@@ -34,6 +36,8 @@ public class ShardingSphereTwoPhaseXATransactionBenchmark implements JDBCConnect
     static {
         DATA_SOURCE = ShardingSpheres.createDataSource();
     }
+    
+    private final ThreadLocal<AtomicInteger> threadLocal = ThreadLocal.withInitial(() -> new AtomicInteger(0));
     
     @SneakyThrows
     @Override
@@ -51,7 +55,8 @@ public class ShardingSphereTwoPhaseXATransactionBenchmark implements JDBCConnect
         try {
             connection = DATA_SOURCE.getConnection();
             connection.setAutoCommit(false);
-            
+    
+            log.debug(Thread.currentThread().getName() + "统计-开始, " + threadLocal.get().incrementAndGet());
             for (int i = 0; i < 10; i++) {
                 try (Statement each = connection.createStatement()) {
                     each.execute(String.format("select c from sbtest1 where id=%s", random.nextInt(BenchmarkParameters.TABLE_SIZE)));
@@ -71,14 +76,17 @@ public class ShardingSphereTwoPhaseXATransactionBenchmark implements JDBCConnect
                 each.execute(String.format("delete from sbtest1 where id=%s", id));
             }
             
-            try (Statement each = connection.createStatement()) {
-                each.execute(String.format("insert into sbtest1 (id,k,c,pad) values (%s,%s,'%s','%s')", id, random.nextInt(Integer.MAX_VALUE), Strings.randomString(120), Strings.randomString(60)));
-            }
+//            try (Statement each = connection.createStatement()) {
+//                each.execute(String.format("insert into sbtest1 (id,k,c,pad) values (%s,%s,'%s','%s')", id, random.nextInt(Integer.MAX_VALUE), Strings.randomString(120), Strings.randomString(60)));
+//            }
+            log.debug(Thread.currentThread().getName() + "统计-结束, " + threadLocal.get().get());
             connection.commit();
+            log.debug(Thread.currentThread().getName() + "统计-commit, " + threadLocal.get().get());
         } catch (Exception e) {
             if (null != connection) {
                 connection.rollback();
             }
+            log.debug(Thread.currentThread().getName() + "统计-异常, " + threadLocal.get().get());
             e.printStackTrace();
         } finally {
             if (null != connection) {
@@ -103,9 +111,9 @@ public class ShardingSphereTwoPhaseXATransactionBenchmark implements JDBCConnect
     
     public static void main(String[] args) throws RunnerException {
         new Runner(new OptionsBuilder()
-                .include(ShardingSphereOnePhaseXATransactionBenchmark.class.getName())
+                .include(ShardingSphereTwoPhaseXATransactionBenchmark.class.getName())
                 .threads(20)
-                .forks(1)
+                .forks(0)
                 .build()).run();
     }
 }
