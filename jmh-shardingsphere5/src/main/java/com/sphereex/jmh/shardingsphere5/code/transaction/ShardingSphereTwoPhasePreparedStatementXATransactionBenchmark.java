@@ -51,11 +51,11 @@ public class ShardingSphereTwoPhasePreparedStatementXATransactionBenchmark imple
     
     private Connection connection;
     
-    private static AtomicInteger threadCount = new AtomicInteger(0);
+    private static final AtomicInteger THREAD_COUNT = new AtomicInteger(0);
     
-    private AtomicInteger loopCount = new AtomicInteger(0);
+    private final AtomicInteger loopCount = new AtomicInteger(0);
     
-    private volatile Integer currentThreadNum = threadCount.incrementAndGet();
+    private final Integer currentThreadNum = THREAD_COUNT.incrementAndGet();
     
     @Setup(Level.Trial)
     public void setup() throws Exception {
@@ -87,7 +87,7 @@ public class ShardingSphereTwoPhasePreparedStatementXATransactionBenchmark imple
             boolean hasRecord = false;
             int localLoopCount = loopCount.incrementAndGet();
             int randomIdNum = currentThreadNum * 50000 + localLoopCount;
-            log.info(Thread.currentThread().getName() + "统计-开始, currentThreadNum: " +  currentThreadNum + ", 全局: " + randomIdNum);
+            log.info(Thread.currentThread().getName() + "Test begin, currentThreadNum: " +  currentThreadNum + ", randomId: " + randomIdNum);
             if (randomIdNum > Integer.MAX_VALUE / 2 || randomIdNum <=0) {
                 loopCount.set(0);
             }
