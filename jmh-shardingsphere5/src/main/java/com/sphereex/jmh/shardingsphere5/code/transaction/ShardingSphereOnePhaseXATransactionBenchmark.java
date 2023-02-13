@@ -99,8 +99,8 @@ public class ShardingSphereOnePhaseXATransactionBenchmark implements JDBCConnect
     public static void main(String[] args) throws RunnerException {
         new Runner(new OptionsBuilder()
                 .include(ShardingSphereOnePhaseXATransactionBenchmark.class.getName())
-                .threads(50)
-                .forks(1)
+                .threads(20)
+                .forks(0)
                 .build()).run();
     }
 }
