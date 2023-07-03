@@ -41,7 +41,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
     <name>JMH benchmark: ShardingSphere 5</name>
 
     <properties>
-        <shardingsphere.version>5.1.1</shardingsphere.version>
+        <shardingsphere.version>5.3.2</shardingsphere.version>
     </properties>
 
     <dependencies>
@@ -62,7 +62,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
         </dependency>
         <dependency>
             <groupId>org.apache.shardingsphere</groupId>
-            <artifactId>shardingsphere-db-protocol-postgresql</artifactId>
+            <artifactId>shardingsphere-postgresql-protocol</artifactId>
             <version>${shardingsphere.version}</version>
         </dependency>
         <dependency>
