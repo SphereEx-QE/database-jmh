@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.sphereex.jmh</groupId>
     <artifactId>jmh-test</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     
     <modules>
@@ -25,9 +25,9 @@
         <jmh.version>1.33</jmh.version>
         <lombok.version>1.18.22</lombok.version>
         <logback.version>1.2.7</logback.version>
-        <HikariCP.version>3.4.2</HikariCP.version>
-        <mysql-connector.version>5.1.47</mysql-connector.version>
-        <postgresql.version>42.3.2</postgresql.version>
+        <HikariCP.version>4.0.3</HikariCP.version>
+        <postgresql.version>42.4.3</postgresql.version>
+        <mysql-connector-java.version>8.0.31</mysql-connector-java.version>
         
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
@@ -66,7 +66,7 @@
             <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
-                <version>${mysql-connector.version}</version>
+                <version>${mysql-connector-java.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.postgresql</groupId>
