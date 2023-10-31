@@ -3,10 +3,11 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>com.sphereex.jmh</groupId>
     <artifactId>jmh-test</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    
     <modules>
         <module>jmh-base</module>
         <module>jmh-jdbc</module>
@@ -14,16 +15,23 @@
         <module>jmh-shardingsphere5</module>
         <module>jmh-shardingsphere4</module>
         <module>jmh-mysqlx</module>
-    
         <module>jmh-dangling</module>
     </modules>
-    <packaging>pom</packaging>
     
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <javac.target>8</javac.target>
         
         <jmh.version>1.33</jmh.version>
+        <lombok.version>1.18.22</lombok.version>
+        <logback.version>1.2.7</logback.version>
+        <HikariCP.version>3.4.2</HikariCP.version>
+        <mysql-connector.version>5.1.47</mysql-connector.version>
+        <postgresql.version>42.3.2</postgresql.version>
+        
+        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+        <maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
+        <maven-dependency-plugin.version>3.2.0</maven-dependency-plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -31,7 +39,7 @@
             <dependency>
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-classic</artifactId>
-                <version>1.2.7</version>
+                <version>${logback.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.openjdk.jmh</groupId>
@@ -47,27 +55,27 @@
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
-                <version>1.18.22</version>
+                <version>${lombok.version}</version>
                 <scope>provided</scope>
             </dependency>
             <dependency>
                 <groupId>com.zaxxer</groupId>
                 <artifactId>HikariCP</artifactId>
-                <version>3.4.2</version>
+                <version>${HikariCP.version}</version>
             </dependency>
             <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
-                <version>5.1.47</version>
+                <version>${mysql-connector.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.postgresql</groupId>
                 <artifactId>postgresql</artifactId>
-                <version>42.3.2</version>
+                <version>${postgresql.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
-
+    
     <dependencies>
         <dependency>
             <groupId>org.openjdk.jmh</groupId>
@@ -92,6 +100,7 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
+            <version>${postgresql.version}</version>
         </dependency>
     </dependencies>
     
@@ -100,21 +109,19 @@
             <plugins>
                 <plugin>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.8.1</version>
+                    <version>${maven-compiler-plugin.version}</version>
                     <configuration>
-<!--                        <compilerVersion>${javac.target}</compilerVersion>-->
                         <source>${javac.target}</source>
                         <target>${javac.target}</target>
-<!--                        <release>${javac.target}</release>-->
                     </configuration>
                 </plugin>
                 <plugin>
                     <artifactId>maven-jar-plugin</artifactId>
-                    <version>3.2.0</version>
+                    <version>${maven-jar-plugin.version}</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-dependency-plugin</artifactId>
-                    <version>3.2.0</version>
+                    <version>${maven-dependency-plugin.version}</version>
                     <executions>
                         <execution>
                             <phase>package</phase>
