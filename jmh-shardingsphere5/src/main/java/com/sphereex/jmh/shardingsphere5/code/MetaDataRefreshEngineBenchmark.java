@@ -1,5 +1,6 @@
 package com.sphereex.jmh.shardingsphere5.code;
 
+import org.apache.shardingsphere.infra.binder.context.statement.dml.SelectStatementContext;
 import org.apache.shardingsphere.infra.binder.engine.SQLBindEngine;
 import org.apache.shardingsphere.infra.connection.refresher.MetaDataRefreshEngine;
 import org.apache.shardingsphere.sql.parser.sql.dialect.statement.postgresql.dml.PostgreSQLSelectStatement;
@@ -20,7 +21,7 @@ public class MetaDataRefreshEngineBenchmark {
     
     @Benchmark
     public void benchMetaDataRefreshEngine() throws SQLException {
-        new MetaDataRefreshEngine(null, null, null).refresh(null, null);
+        new MetaDataRefreshEngine(null, null, null).refresh(new SelectStatementContext(null, null, null, null), null);
     }
     
     public static void main(String[] args) throws IOException {
