@@ -24,7 +24,7 @@
         
         <jmh.version>1.33</jmh.version>
         <lombok.version>1.18.22</lombok.version>
-        <logback.version>1.2.7</logback.version>
+        <logback.version>1.2.9</logback.version>
         <HikariCP.version>4.0.3</HikariCP.version>
         <postgresql.version>42.4.3</postgresql.version>
         <mysql-connector-java.version>8.0.31</mysql-connector-java.version>
