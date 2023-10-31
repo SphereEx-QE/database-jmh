@@ -1,6 +1,5 @@
 package com.sphereex.jmh.shardingsphere5.code.protocol;
 
-import org.apache.shardingsphere.db.protocol.postgresql.packet.command.query.extended.bind.protocol.PostgreSQLTextTimestampUtils;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Fork;
 import org.openjdk.jmh.annotations.Measurement;
@@ -11,6 +10,7 @@ import org.openjdk.jmh.annotations.Warmup;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
+import org.apache.shardingsphere.db.protocol.postgresql.packet.command.query.extended.bind.protocol.text.impl.PostgreSQLTimestampValueParser;
 
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
@@ -48,7 +48,7 @@ public class PostgreSQLTextTimestampUtilsBenchmark {
     
     @Benchmark
     public void benchParse() {
-        PostgreSQLTextTimestampUtils.parse(TEXT_VALUES[random.nextInt(TEXT_VALUES.length)]);
+        new PostgreSQLTimestampValueParser().parse(TEXT_VALUES[random.nextInt(TEXT_VALUES.length)]);
     }
     
     public static void main(String[] args) throws RunnerException {

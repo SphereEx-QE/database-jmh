@@ -18,6 +18,7 @@ import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Threads;
 import org.openjdk.jmh.annotations.Warmup;
 
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 @BenchmarkMode(Mode.Throughput)
@@ -44,26 +45,24 @@ public class TrafficAlgorithmCompareBenchmark {
     
     private void initSQLRegexAlgorithm() {
         sqlRegexAlgorithm = new SQLRegexTrafficAlgorithm();
-        sqlRegexAlgorithm.getProps().setProperty("regex", "(?i)^(UPDATE|SELECT).*WHERE user_id.*");
-        sqlRegexAlgorithm.init();
+        Properties properties = new Properties();
+        properties.put("regex", "(?i)^(UPDATE|SELECT).*WHERE user_id.*");
+        sqlRegexAlgorithm.init(properties);
     }
     
     private void initSQLMatchAlgorithm() {
         sqlMatchAlgorithm = new SQLMatchTrafficAlgorithm();
-        sqlMatchAlgorithm.getProps().setProperty("sql", "SELECT * FROM t_order WHERE content IN (?, ?); UPDATE t_order SET creation_date = NOW() WHERE user_id = 1;");
-        sqlMatchAlgorithm.init();
+        Properties properties = new Properties();
+        properties.put("sql", "SELECT * FROM t_order WHERE content IN (?, ?); UPDATE t_order SET creation_date = NOW() WHERE user_id = 1;");
+        sqlMatchAlgorithm.init(properties);
     }
     
     private void initSQLHintAlgorithm() {
         sqlHintAlgorithm = new SQLHintTrafficAlgorithm();
-        sqlHintAlgorithm.getProps().setProperty("use_traffic", "true");
-        sqlHintAlgorithm.init();
+        Properties properties = new Properties();
+        properties.put("use_traffic", "true");
+        sqlHintAlgorithm.init(properties);
     }
-    
-//    @Benchmark
-//    public void testSQLHintAlgorithmMatch() {
-//        sqlHintAlgorithm.match(new HintTrafficValue<>("/* shardingsphere hint:use_traffic=true */"));
-//    }
     
     @Benchmark
     public void testSQLMatchAlgorithmMatch() {
