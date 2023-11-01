@@ -16,6 +16,7 @@
         <module>jmh-shardingsphere4</module>
         <module>jmh-mysqlx</module>
         <module>jmh-dangling</module>
+        <module>jmh-customizable</module>
     </modules>
     
     <properties>
