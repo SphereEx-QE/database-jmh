@@ -6,7 +6,8 @@ import java.io.FileNotFoundException;
 public class CustomizableUtil {
     
     private static File getFile(String filePath, String errorMessage) throws FileNotFoundException {
-        File result = new File(System.getProperty("user.dir") + File.separator + filePath);
+        filePath = filePath.startsWith(File.separator) ? filePath : System.getProperty("user.dir") + File.separator + filePath;
+        File result = new File(filePath);
         if (!result.exists()) {
             throw new FileNotFoundException(errorMessage);
         }

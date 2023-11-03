@@ -29,7 +29,7 @@ import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 @State(Scope.Thread)
-@Fork(1)
+@Fork(0)
 public class CustomizableBenchmark {
     
     private Connection connection;
@@ -40,7 +40,7 @@ public class CustomizableBenchmark {
     
     private int totalCount;
     
-    private int intervalCount = 1000;
+    private int intervalCount = 10000;
     
     @Setup(Level.Trial)
     public void setup() throws IOException, ClassNotFoundException, SQLException {
@@ -69,13 +69,17 @@ public class CustomizableBenchmark {
     @Measurement(iterations = 1, batchSize = 1)
     @BenchmarkMode(Mode.SingleShotTime)
     @Timeout(time = 5, timeUnit = TimeUnit.HOURS)
-    public void executeSQL() throws SQLException {
+    public void executeSQL() {
         for (String sql : sqlList) {
-            statement.execute(sql);
+            try {
+                statement.execute(sql);
+            } catch (Exception ignore) {
+                System.out.println("execute sql failed: " + sql);
+            }
             totalCount++;
-        }
-        if (totalCount % intervalCount == 0) {
-            System.out.println("already executed " + totalCount + " sqls");
+            if (totalCount % intervalCount == 0) {
+                System.out.println("already executed " + totalCount + " sqls");
+            }
         }
     }
     
