@@ -50,18 +50,17 @@ dataSources:
 rules:
   - !ENCRYPT
     encryptors:
-      md5_encryptor:
-        type: MD5
+      aes_encryptor:
+        type: AES
+        props:
+          aes-key-value: 123456abc
     tables:
       bmsql_config:
         columns:
           cfg_value:
             cipher:
               name: cfg_value_cipher
-              encryptorName: md5_encryptor
-            plain:
-              name: cfg_value
-              queryWithPlain: false
+              encryptorName: aes_encryptor
 
   - !SINGLE
     tables:
@@ -76,5 +75,5 @@ countInterval: 每执行一定数量 SQL 后输出一条当前已经执行的总
 
 一条完整的执行命令如下：
 ```
-java -classpath 'dependency/*:jmh-customizable-1.0-SNAPSHOT.jar' -DintervalCount=500 -DintervalCount=2 -Dconf=mysql.properties -Dscript=sysbench.sql org.openjdk.jmh.Main "com.sphereex.jmh.customizable.CustomizableBenchmark"
+java -classpath 'dependency/*:jmh-customizable-1.0-SNAPSHOT.jar:.' -DintervalCount=500 -Dconf=mysql.properties -Dscript=sysbench.sql org.openjdk.jmh.Main "com.sphereex.jmh.customizable.CustomizableBenchmark"
 ```
