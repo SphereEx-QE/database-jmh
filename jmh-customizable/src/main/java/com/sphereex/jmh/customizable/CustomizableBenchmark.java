@@ -38,11 +38,14 @@ public class CustomizableBenchmark {
     
     private List<String> sqlList;
     
-    private int count;
+    private int totalCount;
+    
+    private int intervalCount = 1000;
     
     @Setup(Level.Trial)
     public void setup() throws IOException, ClassNotFoundException, SQLException {
         Properties configProperties = new Properties();
+        intervalCount = System.getProperty("intervalCount") == null ? intervalCount : Integer.parseInt(System.getProperty("intervalCount"));
         try (InputStream inputStream = Files.newInputStream(CustomizableUtil.getConfigFile(System.getProperty("conf")).toPath())) {
             configProperties.load(inputStream);
             Class.forName(configProperties.getProperty("driverClassName"));
@@ -69,10 +72,10 @@ public class CustomizableBenchmark {
     public void executeSQL() throws SQLException {
         for (String sql : sqlList) {
             statement.execute(sql);
-            count++;
+            totalCount++;
         }
-        if (count % 1000 == 0) {
-            System.out.println("already executed " + count + " sqls");
+        if (totalCount % intervalCount == 0) {
+            System.out.println("already executed " + totalCount + " sqls");
         }
     }
     
