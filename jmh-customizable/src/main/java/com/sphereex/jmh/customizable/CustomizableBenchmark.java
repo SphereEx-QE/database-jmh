@@ -1,6 +1,7 @@
 package com.sphereex.jmh.customizable;
 
 import com.sphereex.jmh.customizable.util.CustomizableUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.openjdk.jmh.Main;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
@@ -30,6 +31,7 @@ import java.util.concurrent.TimeUnit;
 
 @State(Scope.Thread)
 @Fork(0)
+@Slf4j
 public class CustomizableBenchmark {
     
     private Connection connection;
@@ -74,11 +76,11 @@ public class CustomizableBenchmark {
             try {
                 statement.execute(sql);
             } catch (Exception ignore) {
-                System.out.println("execute sql failed: " + sql);
+                log.error("execute sql failed: " + sql);
             }
             totalCount++;
             if (totalCount % intervalCount == 0) {
-                System.out.println("already executed " + totalCount + " sqls");
+                log.info("already executed " + totalCount + " sqls");
             }
         }
     }
