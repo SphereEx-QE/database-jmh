@@ -32,8 +32,8 @@
     </appender>
 
     <logger name="org.apache.shardingsphere" level="warn" additivity="false">
-        <appender-ref ref="console" />
-<!--        <appender-ref ref="FILE" />-->
+<!--        <appender-ref ref="console" />-->
+        <appender-ref ref="FILE" />
     </logger>
     
     <logger name="com.zaxxer.hikari" level="warn">
@@ -42,8 +42,8 @@
     </logger>
 
     <root>
-        <level value="warn" />
-        <appender-ref ref="console" />
-<!--        <appender-ref ref="FILE" />-->
+        <level value="info" />
+<!--        <appender-ref ref="console" />-->
+        <appender-ref ref="FILE" />
     </root>
 </configuration> 

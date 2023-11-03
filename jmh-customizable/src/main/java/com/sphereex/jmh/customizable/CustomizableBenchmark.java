@@ -30,7 +30,7 @@ import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 @State(Scope.Thread)
-@Fork(0)
+@Fork(1)
 @Slf4j
 public class CustomizableBenchmark {
     
