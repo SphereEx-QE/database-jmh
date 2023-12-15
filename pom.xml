@@ -17,6 +17,7 @@
         <module>jmh-mysqlx</module>
         <module>jmh-dangling</module>
         <module>jmh-customizable</module>
+        <module>jmh-dbplusengine-1.7</module>
     </modules>
     
     <properties>
