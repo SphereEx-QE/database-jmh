@@ -32,6 +32,7 @@
 package com.sphereex.jmh.jdbc;
 
 import com.sphereex.jmh.config.BenchmarkParameters;
+import com.sphereex.jmh.util.Strings;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Scope;
@@ -46,7 +47,13 @@ import java.util.concurrent.ThreadLocalRandom;
 @State(Scope.Thread)
 public abstract class UnpooledReadOnlyBenchmarkBase implements JDBCConnectionProvider {
     
+    private final ThreadLocalRandom random = ThreadLocalRandom.current();
+    
     private final PreparedStatement[] preparedStatements = new PreparedStatement[BenchmarkParameters.TABLES];
+    
+    private final PreparedStatement[] globalIndexKPreparedStatements = new PreparedStatement[BenchmarkParameters.TABLES];
+    
+    private final PreparedStatement[] globalIndexCPreparedStatements = new PreparedStatement[BenchmarkParameters.TABLES];
     
     private Connection connection;
     
@@ -57,6 +64,12 @@ public abstract class UnpooledReadOnlyBenchmarkBase implements JDBCConnectionPro
         for (int i = 0; i < preparedStatements.length; i++) {
             preparedStatements[i] = connection.prepareStatement(String.format("select c from sbtest%d where id = ?", i + 1));
         }
+        for (int i = 0; i < globalIndexKPreparedStatements.length; i++) {
+            globalIndexKPreparedStatements[i] = connection.prepareStatement(String.format("select c from sbtest%d where k = ?", i + 1));
+        }
+        for (int i = 0; i < globalIndexCPreparedStatements.length; i++) {
+            globalIndexCPreparedStatements[i] = connection.prepareStatement(String.format("select c from sbtest%d where c = ?", i + 1));
+        }
     }
     
     @Benchmark
@@ -64,12 +77,22 @@ public abstract class UnpooledReadOnlyBenchmarkBase implements JDBCConnectionPro
         int tableOrder = ThreadLocalRandom.current().nextInt(BenchmarkParameters.TABLES);
         preparedStatements[tableOrder].setInt(1, ThreadLocalRandom.current().nextInt(BenchmarkParameters.TABLE_SIZE));
         preparedStatements[tableOrder].execute();
+        globalIndexKPreparedStatements[tableOrder].setInt(1, random.nextInt(Integer.MAX_VALUE));
+        globalIndexKPreparedStatements[tableOrder].execute();
+        globalIndexCPreparedStatements[tableOrder].setString(1, Strings.randomString(120));
+        globalIndexCPreparedStatements[tableOrder].execute();
         connection.commit();
     }
     
     @TearDown(Level.Iteration)
     public void tearDown() throws Exception {
         for (PreparedStatement each : preparedStatements) {
+            each.close();
+        }
+        for (PreparedStatement each : globalIndexKPreparedStatements) {
+            each.close();
+        }
+        for (PreparedStatement each : globalIndexCPreparedStatements) {
             each.close();
         }
         connection.close();

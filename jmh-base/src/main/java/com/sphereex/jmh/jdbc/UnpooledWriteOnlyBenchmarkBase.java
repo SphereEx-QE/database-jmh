@@ -33,7 +33,7 @@ public abstract class UnpooledWriteOnlyBenchmarkBase implements JDBCConnectionPr
         connection = getConnection();
         connection.setAutoCommit(false);
         for (int i = 0; i < indexUpdates.length; i++) {
-            indexUpdates[i] = connection.prepareStatement(String.format("update sbtest%d set k=k+1 where id=?", i + 1));
+            indexUpdates[i] = connection.prepareStatement(String.format("update sbtest%d set k=? where id=?", i + 1));
         }
         for (int i = 0; i < nonIndexUpdates.length; i++) {
             nonIndexUpdates[i] = connection.prepareStatement(String.format("update sbtest%d set c=? where id=?", i + 1));
@@ -49,7 +49,8 @@ public abstract class UnpooledWriteOnlyBenchmarkBase implements JDBCConnectionPr
     @Benchmark
     public void oltpWriteOnly() throws Exception {
         PreparedStatement indexUpdate = indexUpdates[random.nextInt(BenchmarkParameters.TABLES)];
-        indexUpdate.setInt(1, random.nextInt(BenchmarkParameters.TABLE_SIZE));
+        indexUpdate.setInt(1, random.nextInt(Integer.MAX_VALUE));
+        indexUpdate.setInt(2, random.nextInt(BenchmarkParameters.TABLE_SIZE));
         indexUpdate.execute();
         PreparedStatement nonIndexUpdate = nonIndexUpdates[random.nextInt(BenchmarkParameters.TABLES)];
         nonIndexUpdate.setString(1, Strings.randomString(120));
