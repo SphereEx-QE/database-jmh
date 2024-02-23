@@ -48,16 +48,16 @@ public abstract class UnpooledWriteOnlyBenchmarkBase implements JDBCConnectionPr
     
     @Benchmark
     public void oltpWriteOnly() throws Exception {
-        PreparedStatement indexUpdate = indexUpdates[random.nextInt(BenchmarkParameters.TABLES)];
-        indexUpdate.setInt(1, random.nextInt(Integer.MAX_VALUE));
-        indexUpdate.setInt(2, random.nextInt(BenchmarkParameters.TABLE_SIZE));
-        indexUpdate.execute();
-        PreparedStatement nonIndexUpdate = nonIndexUpdates[random.nextInt(BenchmarkParameters.TABLES)];
-        nonIndexUpdate.setString(1, Strings.randomString(120));
-        nonIndexUpdate.setInt(2, random.nextInt(BenchmarkParameters.TABLE_SIZE));
-        nonIndexUpdate.execute();
         int table = random.nextInt(BenchmarkParameters.TABLES);
         int id = random.nextInt(BenchmarkParameters.TABLE_SIZE);
+        PreparedStatement indexUpdate = indexUpdates[table];
+        indexUpdate.setInt(1, random.nextInt(Integer.MAX_VALUE));
+        indexUpdate.setInt(2, id);
+        indexUpdate.execute();
+        PreparedStatement nonIndexUpdate = nonIndexUpdates[table];
+        nonIndexUpdate.setString(1, Strings.randomString(120));
+        nonIndexUpdate.setInt(2, id);
+        nonIndexUpdate.execute();
         PreparedStatement delete = deletes[table];
         delete.setInt(1, id);
         delete.execute();
